@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
+
+    <string name="My_accounts">Мои расчеты</string>
+    <string name="Comrads_accounts">Расчеты товарищей</string>
+    <string name="settings">Настройки</string>
+    <string name="theory">Теория</string>
+    <string name="practice">Практика</string>
+    
+    <string name="app_name">Расчёт зарплаты</string>
+    <string name="action_about">О программе</string>
+    <string name="sp_text">Список расчетов</string>
+    <string name="new_text">Новый расчёт</string>
+    <string name="download">Скачать</string>
+    <string name="AboutText">Название программы: Калькулятор стоимости рабочей силы</string>
+    <string name="Developer">Разработчик: Владимир Петрович Тимофеев</string>
+    <string name="Site">Сайт автора:</string>
+    <string name="Site_URL">rusdelphi.com</string>
+    <string name="E_mail">E-mail:</string>
+    <string name="E_mail_value">burdic.lite@gmail.com</string>
+    <string name="AboutYear">2014 г.</string>
+    <string name="Share_text">Поделиться \nс друзьями</string>
+    <string name="title_activity_about">О программе</string>
+    <string name="title_activity_account">Расчёт</string>
+    <string name="Choose_email_client">Выберите приложение для отправки сообщения:</string>
+   
+   
+    <string name="Link_to_vote"><a name="Будем очень признательны за оставленные комментарии и оценки">https://play.google.com/store/apps/details?id=com.rusdelphi.burdic.lite</a></string>
+    <string name="URL_to_vote">https://play.google.com/store/apps/details?id=com.rusdelphi.burdic.lite</string>
+    <string name="Text_to_vote">Будем очень признательны за оставленные комментарии и оценки</string>
+    <string name="Share_text_URL">https://itunes.apple.com/ru/app/burdiclite/id839196473</string>
+    <string name="Share_text_ask">Вам понравилось наше приложение?\nРасскажите о нём свом друзьям и знакомыми!</string>
+    <string name="Share_text_ok">Рассказать!</string>
+    <string name="Share_text_cancel">Промолчу</string>
+    <string name="Share_text_ask_IOS">У данного приложения есть версия для IOS\nРасскажите о нём свом друзьям и знакомыми!</string>
+    <string name="Vote_text_ok">Оценить!</string>
+    <string name="Vote_text_cancel">Не хочу :-(</string>
+    <string name="Vote_text">Вам понравилось наше приложение?\nОцените его в Google Play!\nНам, как вашим соотечественникам, будет очень приятно!</string>
+   
+    <string name="ac_name">Название рассчета</string>
+    <string name="ac_region">Населенный пункт/регион</string>
+    
+    <string name="ac_save">Сохранить</string>
+    <string name="ac_delete">Удалить рассчет</string>
+    <string name="ac_list">Список затрат</string>
+    <string name="ac_date">Дата рассчета</string>
+    <string name="ac_count">Пересчитать</string>
+    <string name="ac_print">Распечатать</string>
+    <string name="ac_itog_text">Итоговая сумма затрат:</string>
+    <string name="ac_zp_text">Месячная зарплата:</string>
+    <string name="ac_error_text">Сохраните текущее название расчета</string>
+    <string name="ac_save_text">Расчёт сохранен</string>
+    <string name="ac_delete_text">Расчёт удален</string>
+    <string name="ac_send">Отправить расчет на сайт</string>
+    <string name="acl_error">Сохраните расчет</string>
+    <string name="acl_save_error">Заполните все поля расчета</string>
+    
+    
+    <string name="acl_text">Статья расходов</string>
+    <string name="acli_text">В расчете на месяц</string>
+    <string name="host_to_send">http://www.r-p-w.ru/wage/write_account.php</string>
+    <string name="host_to_get_list">http://r-p-w.ru/wage/get_list_accounts.php/</string>
+    <string name="host_to_get_ac">http://r-p-w.ru/wage/get_accounts.php/</string>
+    <string name="unexpected_error">Непредвиденная ошибка</string>
+    
+    
+    
+
+</resources>

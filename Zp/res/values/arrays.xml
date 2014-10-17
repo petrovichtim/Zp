@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
+
+    <string-array name="menu_items">
+        <item>@string/My_accounts</item>
+        <item>@string/Comrads_accounts</item>
+        <item>@string/theory</item>
+        <item>@string/practice</item>
+        <item>@string/settings</item>
+    </string-array>
+    <string-array name="menu_icons">
+        <item>@drawable/raschet_ser</item>
+        <item>@drawable/rascheti_ser</item>
+        <item>@drawable/theory</item>
+        <item>@drawable/andy_tools_hammer_spanner</item>
+        <item>@drawable/menu_settings</item>
+    </string-array>
+
+</resources>
