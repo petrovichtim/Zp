@@ -21,7 +21,11 @@ import java.util.zip.ZipInputStream;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
@@ -35,22 +39,31 @@ public class Tools {
 
 	public static String SaveStringToFile(String inFile, Context ctx,
 			String file_name) {
-
 		Log.d("main", "SaveStringToFile path=" + ctx.getFilesDir());
-
 		try {
 			FileWriter out = new FileWriter(new File(ctx.getFilesDir(),
 					file_name));
 			out.write(inFile);
-
 			out.close();
 		} catch (IOException e) {
-
 		}
 		String s = ctx.getFilesDir().toString() + "/" + file_name;
 		Log.d("main", "SaveStringToFile s=" + s);
 		return s;
 
+	}
+
+	public static Bitmap getBitmapFromView(View view) {
+		Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(),
+				view.getHeight(), Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(returnedBitmap);
+		Drawable bgDrawable = view.getBackground();
+		if (bgDrawable != null)
+			bgDrawable.draw(canvas);
+		else
+			canvas.drawColor(Color.WHITE);
+		view.draw(canvas);
+		return returnedBitmap;
 	}
 
 	public static File getExternalSDCardDirectory() {

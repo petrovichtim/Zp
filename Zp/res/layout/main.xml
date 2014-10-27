@@ -9,7 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/yellow"
-        android:orientation="horizontal" />
+        android:orientation="horizontal" >
+
+       
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/left_drawer"

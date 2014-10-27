@@ -114,11 +114,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/imageView1"
-        android:drawableLeft="@android:drawable/ic_menu_share"
+        android:drawableLeft="@drawable/ic_menu_share"
         android:minHeight="48dp"
         android:onClick="onShareButtonClick"
         android:text="@string/Share_text"
         android:textSize="14sp"
         android:visibility="visible" />
+
+   
 
 </RelativeLayout>

@@ -1,16 +1,25 @@
 package com.rusdelphi.zp;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -22,16 +31,23 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Ac_fragment extends Fragment {
 
 	private View rootView;
+	private EditText en;
+	private EditText er;
+	private EditText ed;
+	private TextView tv_ac_itog;
+	private TextView tv_ac_zp;
 	private static Cursor mCursor = null;
 	static ArrayList<String> mDataList = new ArrayList<String>();
 
@@ -58,7 +74,12 @@ public class Ac_fragment extends Fragment {
 			return true;
 
 		case R.id.share_account:
-			ShareAccount();
+			try {
+				ShareAccount();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return true;
 
 		case R.id.send_account:
@@ -212,9 +233,80 @@ public class Ac_fragment extends Fragment {
 		}
 	}
 
-	private void ShareAccount() {
-		Toast.makeText(getActivity(), "Картинку с цифрами тоже пока не сделал",
-				Toast.LENGTH_LONG).show();
+	private String save_View_ToSDCard(View share_view, String finalName)
+			throws FileNotFoundException {
+		File sdCard = Environment.getExternalStorageDirectory();
+		File file = new File(sdCard, finalName);
+		FileOutputStream fos = new FileOutputStream(file);
+		share_view.setDrawingCacheEnabled(true);
+		share_view.setLayoutParams( new RelativeLayout.LayoutParams(1000, 600));
+		share_view.measure(
+				MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+				MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+		share_view.layout(0, 0, share_view.getMeasuredWidth(),
+				share_view.getMeasuredHeight());
+		Log.d("main", "save_View_ToSDCard height=" +share_view.getMeasuredHeight());
+		Log.d("main", "save_View_ToSDCard width=" +share_view.getMeasuredWidth());
+
+		share_view.buildDrawingCache(true);
+		
+		Bitmap b = Tools.getBitmapFromView(share_view);
+		b.compress(CompressFormat.JPEG, 100, fos);
+		share_view.setDrawingCacheEnabled(false); // clear drawing cache
+		return file.toString();
+	}
+
+	boolean canShareText(boolean allowSmsMms, Intent intent) {
+		List<ResolveInfo> list = getActivity().getPackageManager()
+				.queryIntentActivities(intent, 0);
+		if (list != null && list.size() > 0) {
+			if (allowSmsMms)
+				return true;
+			int handlersCount = 0;
+			for (ResolveInfo li : list) {
+				if (li != null && li.activityInfo != null
+						&& li.activityInfo.packageName != null
+						&& li.activityInfo.packageName == "com.android.mms") {
+				} else
+					++handlersCount;
+			}
+			if (handlersCount > 0)
+				return true;
+		}
+		return false;
+	}
+
+	private void ShareAccount() throws FileNotFoundException {
+		LayoutInflater Inflater = getLayoutInflater(null);
+		View share_view = Inflater.inflate(R.layout.ac_share_fragment, null,
+				false);
+		TextView tv_name = (TextView) share_view.findViewById(R.id.tv_name);
+		tv_name.setText("Название расчета : " + en.getText());
+		TextView tv_region = (TextView) share_view.findViewById(R.id.tv_region);
+		tv_region.setText("Регион расчета : " + er.getText());
+		TextView tv_date = (TextView) share_view.findViewById(R.id.tv_date);
+		tv_date.setText("Дата расчета : " + ed.getText());
+		TextView tv_total = (TextView) share_view.findViewById(R.id.tv_total);
+		tv_total.setText("Общая сумма всех затрат : " + tv_ac_itog.getText());
+		TextView tv_zp = (TextView) share_view.findViewById(R.id.tv_zp);
+		tv_zp.setText("В пересчете на месяц : " + tv_ac_zp.getText());
+
+		Intent share = new Intent(Intent.ACTION_SEND);
+		share.setType("image/jpeg");
+//		Uri uri = Uri.fromFile(new File(save_View_ToSDCard(share_view, tv_name
+//				.getText().toString() + ".jpg")));
+		Uri uri = Uri.parse("file:///"+save_View_ToSDCard(share_view, tv_name
+				.getText().toString() + ".jpg"));
+		share.putExtra(Intent.EXTRA_STREAM, uri);
+		if (canShareText(true, share)) {
+			startActivityForResult(
+					Intent.createChooser(share, "Поделиться с помощью"), 0);
+		} else {
+			Toast.makeText(getActivity(),
+					"Установите социальные приложения и повторите попытку",
+					Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 	private void DeleteAccount() {
@@ -249,11 +341,11 @@ public class Ac_fragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.ac_fragment, container, false);
-		EditText en = (EditText) rootView.findViewById(R.id.editName);
-		EditText er = (EditText) rootView.findViewById(R.id.editRegion);
-		EditText ed = (EditText) rootView.findViewById(R.id.editDate);
-		TextView tv_ac_itog = (TextView) rootView.findViewById(R.id.tv_ac_itog);
-		TextView tv_ac_zp = (TextView) rootView.findViewById(R.id.tv_ac_zp);
+		en = (EditText) rootView.findViewById(R.id.editName);
+		er = (EditText) rootView.findViewById(R.id.editRegion);
+		ed = (EditText) rootView.findViewById(R.id.editDate);
+		tv_ac_itog = (TextView) rootView.findViewById(R.id.tv_ac_itog);
+		tv_ac_zp = (TextView) rootView.findViewById(R.id.tv_ac_zp);
 		Button btn = (Button) rootView.findViewById(R.id.ac_list_button);
 		btn.setOnClickListener(new OnClickListener() {
 

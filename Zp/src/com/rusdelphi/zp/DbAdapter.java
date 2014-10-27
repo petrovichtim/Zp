@@ -248,6 +248,7 @@ public class DbAdapter {
 		}
 
 	}
+	
 
 	public void updSys_id(String sys_id, String _id) {
 		if (mDb == null) {
