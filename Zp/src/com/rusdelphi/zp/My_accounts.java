@@ -28,10 +28,12 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 	private ListView mListView;
 	static SimpleCursorAdapter sca;
 	static Loader<Cursor> loadermanager;
+	private boolean mSiteIsAvailable = false;
 	int mAcType;
 	static final String ACCOUNTS_TYPE = "ACCOUNTS_TYPE";
 	// формируем столбцы сопоставления
-	String[] from = new String[] { DbAdapter.COLUMN_NAME,DbAdapter.COLUMN_REGION, DbAdapter.COLUMN_DATE };
+	String[] from = new String[] { DbAdapter.COLUMN_NAME,
+			DbAdapter.COLUMN_REGION, DbAdapter.COLUMN_DATE };
 	int[] to = new int[] { R.id.name, R.id.region, R.id.date, };
 	private static LoaderManager mngr;
 	static Context ctx;
@@ -44,6 +46,16 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 		f.setHasOptionsMenu(true);
 		return f;
 	}
+
+//	private void CheckHost() {
+//		new Thread(new Runnable() {
+//			public void run() {
+//				mSiteIsAvailable = Tools
+//						.isConnected(getString(R.string.host_to_get_list));
+//			}
+//		}).start();
+//
+//	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -77,19 +89,19 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 					Toast.LENGTH_LONG).show();
 			return;
 		}
-		ConnectivityManager cm = (ConnectivityManager) getActivity()
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		// ConnectivityManager cm = (ConnectivityManager) getActivity()
+		// .getSystemService(Context.CONNECTIVITY_SERVICE);
+		// NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
 		// проверяем хост по активной сети
-		boolean isHostAlive = cm.requestRouteToHost(activeNetwork.getType(),
-				R.string.host_to_get_list);
+		// boolean isHostAlive = cm.requestRouteToHost(activeNetwork.getType(),
+		// R.string.host_to_get_list);
 
-		if (!isHostAlive) {
-			Toast.makeText(getActivity(), "Сервер не доступен",
-					Toast.LENGTH_LONG).show();
-			return;
-		}
+//		if (!mSiteIsAvailable) {
+//			Toast.makeText(getActivity(), "Сервер не доступен",
+//					Toast.LENGTH_LONG).show();
+//			return;
+//		}
 
 		GetAcListTask galt = new GetAcListTask();
 		galt.ctx = getActivity();
@@ -129,6 +141,7 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//CheckHost();
 		ctx = getActivity();
 		mAcType = getArguments().getInt(ACCOUNTS_TYPE);
 		// костыль!
@@ -163,8 +176,8 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 		View rootView = inflater.inflate(R.layout.accounts_fragment, container,
 				false);
 		mListView = (ListView) rootView.findViewById(R.id.counts_list);
-		sca = new SimpleCursorAdapter(getActivity(), R.layout.ac_list_item, null,
-				from, to, 0);
+		sca = new SimpleCursorAdapter(getActivity(), R.layout.ac_list_item,
+				null, from, to, 0);
 		mListView.setAdapter(sca);
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override

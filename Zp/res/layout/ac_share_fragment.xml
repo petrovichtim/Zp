@@ -3,6 +3,7 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="500dp"
     android:layout_height="300dp"
+    android:background="@drawable/palace"
     android:minHeight="50dp" >
 
     <TextView

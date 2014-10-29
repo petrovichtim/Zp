@@ -44,7 +44,7 @@ public class Settings extends Fragment {
 	}
 
 	public void Blog_View() {
-		Uri address = Uri.parse("http://rusdelphi.com/app");
+		Uri address = Uri.parse("http://www.r-p-w.ru/app");
 		Intent openlink = new Intent(Intent.ACTION_VIEW, address);
 		startActivity(openlink);
 	}

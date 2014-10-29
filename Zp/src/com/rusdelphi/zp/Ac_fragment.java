@@ -10,7 +10,6 @@ import java.util.concurrent.ExecutionException;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -48,6 +47,7 @@ public class Ac_fragment extends Fragment {
 	private EditText ed;
 	private TextView tv_ac_itog;
 	private TextView tv_ac_zp;
+	private boolean mSiteIsAvailable = false;
 	private static Cursor mCursor = null;
 	static ArrayList<String> mDataList = new ArrayList<String>();
 
@@ -178,24 +178,34 @@ public class Ac_fragment extends Fragment {
 
 	}
 
+	private void CheckHost() {
+		new Thread(new Runnable() {
+			public void run() {
+				mSiteIsAvailable = Tools
+						.isConnected(getString(R.string.host_to_send));
+			}
+		}).start();
+
+	}
+
 	private void SendAccount() {
 		if (!Tools.isOnline(getActivity())) {
 			Toast.makeText(getActivity(), "Подключите интернет",
 					Toast.LENGTH_LONG).show();
 			return;
 		}
-		ConnectivityManager cm = (ConnectivityManager) getActivity()
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		//ConnectivityManager cm = (ConnectivityManager) getActivity()
+		//		.getSystemService(Context.CONNECTIVITY_SERVICE);
+		//NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
 		// проверяем хост по активной сети
-		boolean isHostAlive = cm.requestRouteToHost(activeNetwork.getType(),
-				R.string.host_to_send);
-		if (!isHostAlive) {
-			Toast.makeText(getActivity(), "Сервер не доступен",
-					Toast.LENGTH_LONG).show();
-			return;
-		}
+//		boolean isHostAlive = cm.requestRouteToHost(activeNetwork.getType(),
+//				R.string.host_to_send);
+//		if (!mSiteIsAvailable) {
+//			Toast.makeText(getActivity(), "Сервер не доступен",
+//					Toast.LENGTH_LONG).show();
+//			return;
+//		}
 
 		// получить данные для отправки
 		mCursor = Main.mDb.getListAccount(Main.mAccount_id);
@@ -239,17 +249,19 @@ public class Ac_fragment extends Fragment {
 		File file = new File(sdCard, finalName);
 		FileOutputStream fos = new FileOutputStream(file);
 		share_view.setDrawingCacheEnabled(true);
-		share_view.setLayoutParams( new RelativeLayout.LayoutParams(1000, 600));
+		share_view.setLayoutParams(new RelativeLayout.LayoutParams(1000, 600));
 		share_view.measure(
 				MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
 				MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
 		share_view.layout(0, 0, share_view.getMeasuredWidth(),
 				share_view.getMeasuredHeight());
-		Log.d("main", "save_View_ToSDCard height=" +share_view.getMeasuredHeight());
-		Log.d("main", "save_View_ToSDCard width=" +share_view.getMeasuredWidth());
+		Log.d("main",
+				"save_View_ToSDCard height=" + share_view.getMeasuredHeight());
+		Log.d("main",
+				"save_View_ToSDCard width=" + share_view.getMeasuredWidth());
 
 		share_view.buildDrawingCache(true);
-		
+
 		Bitmap b = Tools.getBitmapFromView(share_view);
 		b.compress(CompressFormat.JPEG, 100, fos);
 		share_view.setDrawingCacheEnabled(false); // clear drawing cache
@@ -293,10 +305,12 @@ public class Ac_fragment extends Fragment {
 
 		Intent share = new Intent(Intent.ACTION_SEND);
 		share.setType("image/jpeg");
-//		Uri uri = Uri.fromFile(new File(save_View_ToSDCard(share_view, tv_name
-//				.getText().toString() + ".jpg")));
-		Uri uri = Uri.parse("file:///"+save_View_ToSDCard(share_view, tv_name
-				.getText().toString() + ".jpg"));
+		// Uri uri = Uri.fromFile(new File(save_View_ToSDCard(share_view,
+		// tv_name
+		// .getText().toString() + ".jpg")));
+		Uri uri = Uri.parse("file:///"
+				+ save_View_ToSDCard(share_view, tv_name.getText().toString()
+						+ ".jpg"));
 		share.putExtra(Intent.EXTRA_STREAM, uri);
 		if (canShareText(true, share)) {
 			startActivityForResult(
@@ -340,6 +354,7 @@ public class Ac_fragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		CheckHost();
 		rootView = inflater.inflate(R.layout.ac_fragment, container, false);
 		en = (EditText) rootView.findViewById(R.id.editName);
 		er = (EditText) rootView.findViewById(R.id.editRegion);

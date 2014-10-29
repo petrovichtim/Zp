@@ -14,8 +14,8 @@
     <string name="download">Скачать</string>
     <string name="AboutText">Название программы: Калькулятор стоимости рабочей силы</string>
     <string name="Developer">Разработчик: Владимир Петрович Тимофеев</string>
-    <string name="Site">Сайт автора:</string>
-    <string name="Site_URL">rusdelphi.com</string>
+    <string name="Site">Сайт приложения:</string>
+    <string name="Site_URL">www.r-p-w.ru/app</string>
     <string name="E_mail">E-mail:</string>
     <string name="E_mail_value">burdic.lite@gmail.com</string>
     <string name="AboutYear">2014 г.</string>
@@ -59,8 +59,8 @@
     <string name="acl_text">Статья расходов</string>
     <string name="acli_text">В расчете на месяц</string>
     <string name="host_to_send">http://www.r-p-w.ru/wage/write_account.php</string>
-    <string name="host_to_get_list">http://r-p-w.ru/wage/get_list_accounts.php/</string>
-    <string name="host_to_get_ac">http://r-p-w.ru/wage/get_accounts.php/</string>
+    <string name="host_to_get_list">http://www.r-p-w.ru/wage/get_list_accounts.php/</string>
+    <string name="host_to_get_ac">http://www.r-p-w.ru/wage/get_accounts.php/</string>
     <string name="unexpected_error">Непредвиденная ошибка</string>
     
     

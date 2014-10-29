@@ -19,6 +19,12 @@ import java.net.URLConnection;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ConnectionKeepAliveStrategy;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HttpContext;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -36,6 +42,21 @@ import android.widget.ImageView;
 
 public class Tools {
 	private static final String TAG = "Tools";
+
+	public static boolean isConnected(String url_name) {
+
+		try {
+			URL url = new URL(url_name);
+			HttpURLConnection urlConnection = (HttpURLConnection) url
+					.openConnection();
+			urlConnection.connect();
+			urlConnection.disconnect();
+			return true;
+		} catch (IOException e) {
+			Log.e(TAG, "Exception", e);
+		}
+		return false;
+	}
 
 	public static String SaveStringToFile(String inFile, Context ctx,
 			String file_name) {
@@ -200,6 +221,25 @@ public class Tools {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static boolean isConnectedOk(String url) {
+		try {
+			HttpGet request = new HttpGet(url);
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			httpClient.setKeepAliveStrategy(new ConnectionKeepAliveStrategy() {
+				@Override
+				public long getKeepAliveDuration(HttpResponse response,
+						HttpContext context) {
+					return 0;
+				}
+			});
+			HttpResponse response = httpClient.execute(request);
+			return response.getStatusLine().getStatusCode() == 200;
+
+		} catch (IOException e) {
+		}
+		return false;
 	}
 
 	public static boolean isOnline(Context context) {
