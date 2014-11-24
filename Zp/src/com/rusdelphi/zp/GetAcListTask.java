@@ -117,7 +117,9 @@ public class GetAcListTask extends AsyncTask<String, Integer, String> {
 				Main.CreateListDialog();
 			super.onPostExecute(result);
 			return;
-		}
+		} else
+			Toast.makeText(ctx, R.string.download_error, Toast.LENGTH_LONG)
+					.show();
 		progressDialog.hide();
 		progressDialog.dismiss();
 		super.onPostExecute(result);

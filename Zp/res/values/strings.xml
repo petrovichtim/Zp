@@ -62,6 +62,7 @@
     <string name="host_to_get_list">http://www.r-p-w.ru/wage/get_list_accounts.php/</string>
     <string name="host_to_get_ac">http://www.r-p-w.ru/wage/get_accounts.php/</string>
     <string name="unexpected_error">Непредвиденная ошибка</string>
+    <string name="download_error">Ошибка при получении списка расчетов</string>
     
     
     
