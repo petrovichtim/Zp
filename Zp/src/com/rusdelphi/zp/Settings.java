@@ -44,7 +44,7 @@ public class Settings extends Fragment {
 	}
 
 	public void Blog_View() {
-		Uri address = Uri.parse("http://www.r-p-w.ru/app");
+		Uri address = Uri.parse("http://rpw-mos.ru/apps");
 		Intent openlink = new Intent(Intent.ACTION_VIEW, address);
 		startActivity(openlink);
 	}
@@ -54,7 +54,7 @@ public class Settings extends Fragment {
 		sendMail.setType("plain/text");
 		sendMail.putExtra(Intent.EXTRA_EMAIL,
 				new String[] { "burdic.lite@gmail.com" });
-		sendMail.putExtra(Intent.EXTRA_SUBJECT, "businessquote");
+		sendMail.putExtra(Intent.EXTRA_SUBJECT, "zp");
 		startActivity(Intent.createChooser(sendMail,
 				getResources().getString(R.string.Choose_email_client)));
 	}

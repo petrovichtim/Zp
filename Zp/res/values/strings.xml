@@ -15,7 +15,9 @@
     <string name="AboutText">Название программы: Калькулятор стоимости рабочей силы</string>
     <string name="Developer">Разработчик: Владимир Петрович Тимофеев</string>
     <string name="Site">Сайт приложения:</string>
-    <string name="Site_URL">www.r-p-w.ru/app</string>
+    <string name="Site_URL">http://rpw-mos.ru/apps</string>
+    <string name="Theory_URL">Более подробно по адресу <a href="http://rpw-mos.ru/theory">http://rpw-mos.ru/theory</a></string>
+    <string name="Practice_URL">Более подробно по адресу <a href="http://rpw-mos.ru/practice">http://rpw-mos.ru/practice</a></string>
     <string name="E_mail">E-mail:</string>
     <string name="E_mail_value">burdic.lite@gmail.com</string>
     <string name="AboutYear">2014 г.</string>
@@ -58,13 +60,15 @@
     
     <string name="acl_text">Статья расходов</string>
     <string name="acli_text">В расчете на месяц</string>
-    <string name="host_to_send">http://www.r-p-w.ru/wage/write_account.php</string>
-    <string name="host_to_get_list">http://www.r-p-w.ru/wage/get_list_accounts.php/</string>
-    <string name="host_to_get_ac">http://www.r-p-w.ru/wage/get_accounts.php/</string>
+    <string name="host_to_send">http://rpw-mos.ru/write_account.php</string>
+    <string name="host_to_get_list">http://rpw-mos.ru/get_list_accounts.php</string>
+    <string name="host_to_get_ac">http://rpw-mos.ru/get_accounts.php</string>
     <string name="unexpected_error">Непредвиденная ошибка</string>
     <string name="download_error">Ошибка при получении списка расчетов</string>
+    <!-- Теория -->
+     <string name="theory_text">Заработная плата, как известно, – это цена рабочей силы. Объективной основой цены рабочей силы служит стоимость рабочей силы. Стоимость рабочей силы определяется, в свою очередь, стоимостью жизненных средств, необходимых для нормального воспроизводства работника и членов его семьи. Для определения величины стоимости рабочей силы в расчете на месяц её использования необходимо учесть все затраты на воспроизводство работника и членов его семьи за время трудовой деятельности, исчисляя их в расчете на месяц, и просуммировать. Принимаемое в расчет время трудовой деятельности — 25 лет, состав семьи — 5 человек (трое детей), исходя из государственных требований обеспечения нормального воспроизводства населения России. </string>
     
-    
-    
-
+    <!-- Практика -->
+    <string name="practice_text">В настоящее время, данный расчет применяется на ряде предприятий при расчете заработной платы.</string>
+   
 </resources>

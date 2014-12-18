@@ -27,12 +27,13 @@ import android.widget.Toast;
 public class SendDataTask extends AsyncTask<String, Integer, String> {
 	ProgressDialog progressDialog;
 	public Context ctx;
-	private Exception m_error = null;
+
+	// private Exception m_error = null;
 
 	@Override
 	protected String doInBackground(String... key) {
 
-		//Tools.SendJava();
+		// Tools.SendJava();
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(ctx.getString(R.string.host_to_send));
@@ -48,7 +49,8 @@ public class SendDataTask extends AsyncTask<String, Integer, String> {
 				nameValuePairs.add(new BasicNameValuePair("sum" + (i - 3),
 						key[i]));
 
-			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.UTF_8));
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,
+					HTTP.UTF_8));
 			// Выполняем HTTP Post Request
 			HttpResponse response = httpclient.execute(httppost);
 			String resp = entityToString(response.getEntity());
@@ -58,10 +60,10 @@ public class SendDataTask extends AsyncTask<String, Integer, String> {
 
 		} catch (ClientProtocolException e) {
 			Log.d("пост", "ошибка1" + e.toString());
-			m_error = e;
+			// m_error = e;
 		} catch (IOException e) {
 			Log.d("пост", "ошибка2" + e.toString());
-			m_error = e;
+			// m_error = e;
 		}
 		return null;
 	}

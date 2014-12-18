@@ -37,7 +37,6 @@ public class DbAdapter {
 	private static final String DB_VERSION_TAG = "DB_VERSION";
 	private static final String TAG = DbAdapter.class.getSimpleName();
 
-
 	// public static final String COLUMN_TEXT = "text";
 
 	/*
@@ -182,7 +181,8 @@ public class DbAdapter {
 	public DbAdapter(Context context) {
 		mContext = context;
 		DB_PATH = getDBPath(context);// context.getDatabasePath(DB_NAME).getPath();
-		mDbHelper = new DbHelper(mContext, DB_NAME, null, DB_VERSION);
+		if (mDbHelper == null)
+			mDbHelper = new DbHelper(mContext, DB_NAME, null, DB_VERSION);
 
 	}
 
@@ -212,11 +212,11 @@ public class DbAdapter {
 			return null;
 		}
 		if (AcType == R.string.My_accounts)
-			return mDb.query(DB_TABLE_NAME, null, "own_ac=1", null, null,
-					null, "date");
+			return mDb.query(DB_TABLE_NAME, null, "own_ac=1", null, null, null,
+					"date");
 		if (AcType == R.string.Comrads_accounts)
-			return mDb.query(DB_TABLE_NAME, null, "own_ac=0", null, null,
-					null, "date");
+			return mDb.query(DB_TABLE_NAME, null, "own_ac=0", null, null, null,
+					"date");
 		if (AcType == R.string.ac_list)
 			return getExpenses(Main.mAccount_id);
 
@@ -248,7 +248,6 @@ public class DbAdapter {
 		}
 
 	}
-	
 
 	public void updSys_id(String sys_id, String _id) {
 		if (mDb == null) {
@@ -313,7 +312,8 @@ public class DbAdapter {
 				+ "=?", new String[] { ac_id, exp_id });
 	}
 
-	public long insertAccount(String name,String region, String date, String sys_id,int own_ac) {
+	public long insertAccount(String name, String region, String date,
+			String sys_id, int own_ac) {
 		if (mDb == null) {
 			return -1;
 		} else {
@@ -338,7 +338,7 @@ public class DbAdapter {
 		}
 	}
 
-	public int updateAccount(String name,String region, String date, String id) {
+	public int updateAccount(String name, String region, String date, String id) {
 		ContentValues newValues = new ContentValues();
 		newValues.put("name", name);
 		newValues.put("region", region);
