@@ -8,7 +8,7 @@
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

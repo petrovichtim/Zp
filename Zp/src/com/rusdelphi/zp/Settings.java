@@ -53,7 +53,7 @@ public class Settings extends Fragment {
 		Intent sendMail = new Intent(android.content.Intent.ACTION_SEND);
 		sendMail.setType("plain/text");
 		sendMail.putExtra(Intent.EXTRA_EMAIL,
-				new String[] { "burdic.lite@gmail.com" });
+				new String[] { "rpw.mos@gmail.com" });
 		sendMail.putExtra(Intent.EXTRA_SUBJECT, "zp");
 		startActivity(Intent.createChooser(sendMail,
 				getResources().getString(R.string.Choose_email_client)));

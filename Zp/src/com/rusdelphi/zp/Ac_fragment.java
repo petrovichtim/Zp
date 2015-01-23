@@ -8,14 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -194,18 +191,18 @@ public class Ac_fragment extends Fragment {
 					Toast.LENGTH_LONG).show();
 			return;
 		}
-		//ConnectivityManager cm = (ConnectivityManager) getActivity()
-		//		.getSystemService(Context.CONNECTIVITY_SERVICE);
-		//NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		// ConnectivityManager cm = (ConnectivityManager) getActivity()
+		// .getSystemService(Context.CONNECTIVITY_SERVICE);
+		// NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
 		// проверяем хост по активной сети
-//		boolean isHostAlive = cm.requestRouteToHost(activeNetwork.getType(),
-//				R.string.host_to_send);
-//		if (!mSiteIsAvailable) {
-//			Toast.makeText(getActivity(), "Сервер не доступен",
-//					Toast.LENGTH_LONG).show();
-//			return;
-//		}
+		// boolean isHostAlive = cm.requestRouteToHost(activeNetwork.getType(),
+		// R.string.host_to_send);
+		// if (!mSiteIsAvailable) {
+		// Toast.makeText(getActivity(), "Сервер не доступен",
+		// Toast.LENGTH_LONG).show();
+		// return;
+		// }
 
 		// получить данные для отправки
 		mCursor = Main.mDb.getListAccount(Main.mAccount_id);

@@ -2,8 +2,6 @@ package com.rusdelphi.zp;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,7 +26,7 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 	private ListView mListView;
 	static SimpleCursorAdapter sca;
 	static Loader<Cursor> loadermanager;
-	private boolean mSiteIsAvailable = false;
+	// private boolean mSiteIsAvailable = false;
 	int mAcType;
 	static final String ACCOUNTS_TYPE = "ACCOUNTS_TYPE";
 	// формируем столбцы сопоставления
@@ -47,15 +45,15 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 		return f;
 	}
 
-//	private void CheckHost() {
-//		new Thread(new Runnable() {
-//			public void run() {
-//				mSiteIsAvailable = Tools
-//						.isConnected(getString(R.string.host_to_get_list));
-//			}
-//		}).start();
-//
-//	}
+	// private void CheckHost() {
+	// new Thread(new Runnable() {
+	// public void run() {
+	// mSiteIsAvailable = Tools
+	// .isConnected(getString(R.string.host_to_get_list));
+	// }
+	// }).start();
+	//
+	// }
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -97,11 +95,11 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 		// boolean isHostAlive = cm.requestRouteToHost(activeNetwork.getType(),
 		// R.string.host_to_get_list);
 
-//		if (!mSiteIsAvailable) {
-//			Toast.makeText(getActivity(), "Сервер не доступен",
-//					Toast.LENGTH_LONG).show();
-//			return;
-//		}
+		// if (!mSiteIsAvailable) {
+		// Toast.makeText(getActivity(), "Сервер не доступен",
+		// Toast.LENGTH_LONG).show();
+		// return;
+		// }
 
 		GetAcListTask galt = new GetAcListTask();
 		galt.ctx = getActivity();
@@ -141,7 +139,7 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//CheckHost();
+		// CheckHost();
 		ctx = getActivity();
 		mAcType = getArguments().getInt(ACCOUNTS_TYPE);
 		// костыль!
