@@ -212,28 +212,24 @@ public class Main extends ActionBarActivity implements
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		page = position;
+		mDraverCliked = true;
 		Tools.hideSoftKeyboard(this);
 		switch (position) {
 		case 0:
 			pendingFragment = My_accounts.getInstance(R.string.My_accounts);
-			mDraverCliked = true;
 			break;
 		case 1:
 			pendingFragment = My_accounts
 					.getInstance(R.string.Comrads_accounts);
-			mDraverCliked = true;
 			break;
 		case 2:
 			pendingFragment = Info.getInstance(R.string.theory);
-			mDraverCliked = true;
 			break;
 		case 3:
 			pendingFragment = Info.getInstance(R.string.practice);
-			mDraverCliked = true;
 			break;
 		case 4:
 			pendingFragment = Settings.getInstance();
-			mDraverCliked = true;
 			break;
 		}
 		drawerLayout.closeDrawers();
