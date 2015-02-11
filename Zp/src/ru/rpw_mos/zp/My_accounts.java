@@ -174,6 +174,7 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 		View rootView = inflater.inflate(R.layout.accounts_fragment, container,
 				false);
 		mListView = (ListView) rootView.findViewById(R.id.counts_list);
+		mListView.setEmptyView(rootView.findViewById(R.id.empty));
 		sca = new SimpleCursorAdapter(getActivity(), R.layout.ac_list_item,
 				null, from, to, 0);
 		mListView.setAdapter(sca);

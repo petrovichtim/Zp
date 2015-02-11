@@ -66,7 +66,9 @@ public class Ac_list_fragment extends Fragment implements
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.accounts_list_fragment,
 				container, false);
+
 		mListView = (ListView) rootView.findViewById(R.id.counts_list);
+
 		sca = new MySimpleCursorAdapter(getActivity(),
 				R.layout.exp_list_item_fragment, null, FROM, TO, 0);
 
