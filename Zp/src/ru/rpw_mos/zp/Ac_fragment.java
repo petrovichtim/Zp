@@ -165,7 +165,7 @@ public class Ac_fragment extends Fragment {
 			i++;
 		}
 
-		Uri fileUri = Uri.parse("file:///"
+		Uri fileUri = Uri.parse("file://"
 				+ Tools.SaveStringToFile(file_rtf, getActivity(), file_name));
 		Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);

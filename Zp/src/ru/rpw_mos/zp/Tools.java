@@ -58,18 +58,39 @@ public class Tools {
 		return false;
 	}
 
+	public static File getDownloadsStorageDir(String fileName)
+			throws IOException {
+		File folder = new File(
+				Environment
+						.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+				"/");
+		folder.mkdirs();
+
+		File file = new File(
+				Environment
+						.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+				fileName);
+		if (!file.createNewFile()) {
+			Log.d("main", "File not created");
+		}
+		return file;
+	}
+
 	public static String SaveStringToFile(String inFile, Context ctx,
 			String file_name) {
 		Log.d("main", "SaveStringToFile path=" + ctx.getFilesDir());
+		String s = null;
 		try {
-			FileWriter out = new FileWriter(new File(ctx.getFilesDir(),
-					file_name));
+			File f = getDownloadsStorageDir(file_name);
+			FileWriter out = new FileWriter(f);
 			out.write(inFile);
+			s = f.getAbsolutePath();
+			Log.d("main", "SaveStringToFile s=" + s);
 			out.close();
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		String s = ctx.getFilesDir().toString() + "/" + file_name;
-		Log.d("main", "SaveStringToFile s=" + s);
+
 		return s;
 
 	}

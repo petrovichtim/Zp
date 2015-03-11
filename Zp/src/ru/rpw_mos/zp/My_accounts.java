@@ -178,6 +178,7 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
 		sca = new SimpleCursorAdapter(getActivity(), R.layout.ac_list_item,
 				null, from, to, 0);
 		mListView.setAdapter(sca);
+
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
