@@ -236,6 +236,14 @@ public class Main extends ActionBarActivity implements
 	}
 
 	@Override
+	protected void onDestroy() {
+		if (mDb != null)
+			mDb.close();
+		mDb = null;
+		super.onDestroy();
+	}
+
+	@Override
 	public void onBackPressed() {
 		FragmentManager fm = getSupportFragmentManager();
 		if (fm.getBackStackEntryCount() > 1) {

@@ -47,7 +47,7 @@ public class DbAdapter {
 	private static String DB_PATH = null;
 	private static SQLiteDatabase mDb = null;
 	private final Context mContext;
-	private DbHelper mDbHelper;
+	private DbHelper mDbHelper = null;
 
 	static void copyDBifNeeded(Context c) throws IOException {
 		boolean unpackDB = false;
@@ -92,9 +92,9 @@ public class DbAdapter {
 		bufferOut.close();
 		fout.close();
 		is.close();
-
-		mDb = SQLiteDatabase.openDatabase(getDBPath(c), null,
-				SQLiteDatabase.OPEN_READWRITE);// OPEN_READONLY
+		if (mDb == null)
+			mDb = SQLiteDatabase.openDatabase(getDBPath(c), null,
+					SQLiteDatabase.OPEN_READWRITE);// OPEN_READONLY
 
 		Log.d(TAG, "Upgrading complete!");
 
@@ -203,8 +203,10 @@ public class DbAdapter {
 	}
 
 	public void close() {
-		mDb.close();
-		mDb = null;
+		if (mDb != null) {
+			mDb.close();
+			mDb = null;
+		}
 	}
 
 	public Cursor getAccounts(int AcType) {
@@ -299,6 +301,7 @@ public class DbAdapter {
 					s.append(tmp + ',');
 			}
 		}
+		c.close();
 		Log.d("updateExp", "getSysAcList String=" + s.toString());
 		if (s.length() > 1)
 			s.deleteCharAt(s.length() - 1);
