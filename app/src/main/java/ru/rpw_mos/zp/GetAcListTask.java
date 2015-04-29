@@ -6,15 +6,12 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class GetAcListTask extends AsyncTask<String, Integer, String> {
     ProgressDialog progressDialog;
@@ -39,8 +36,8 @@ public class GetAcListTask extends AsyncTask<String, Integer, String> {
         // на сервер
 
         // Building Parameters
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("ids", args[0]));
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("ids", args[0]);
         // getting JSON string from URL
         JSONObject json = jParser.makeHttpRequest(
                 ctx.getString(R.string.host_to_get_list), "POST", params);

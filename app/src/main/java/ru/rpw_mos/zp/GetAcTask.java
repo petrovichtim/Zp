@@ -6,14 +6,12 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GetAcTask extends AsyncTask<String, Integer, String> {
     ProgressDialog progressDialog;
@@ -37,8 +35,10 @@ public class GetAcTask extends AsyncTask<String, Integer, String> {
     protected String doInBackground(String... args) {
 
         // Building Parameters
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("ids", args[0]));
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("ids", args[0]);
+
+
         Log.d("main", "GetAcTask doInBackground args[0]=" + args[0]);
         // getting JSON string from URL
         JSONObject json = jParser.makeHttpRequest(

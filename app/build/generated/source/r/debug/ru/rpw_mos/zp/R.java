@@ -1800,15 +1800,17 @@ containing a value of this type.
         public static final int host_to_get_list=0x7f0b0040;
         public static final int host_to_send=0x7f0b0041;
         public static final int new_text=0x7f0b0042;
-        public static final int practice=0x7f0b0043;
-        public static final int practice_text=0x7f0b0044;
-        public static final int settings=0x7f0b0045;
-        public static final int sp_text=0x7f0b0046;
-        public static final int theory=0x7f0b0047;
-        public static final int theory_text=0x7f0b0048;
-        public static final int title_activity_about=0x7f0b0049;
-        public static final int title_activity_account=0x7f0b004a;
-        public static final int unexpected_error=0x7f0b004b;
+        public static final int ns_menu_close=0x7f0b0043;
+        public static final int ns_menu_open=0x7f0b0044;
+        public static final int practice=0x7f0b0045;
+        public static final int practice_text=0x7f0b0046;
+        public static final int settings=0x7f0b0047;
+        public static final int sp_text=0x7f0b0048;
+        public static final int theory=0x7f0b0049;
+        public static final int theory_text=0x7f0b004a;
+        public static final int title_activity_about=0x7f0b004b;
+        public static final int title_activity_account=0x7f0b004c;
+        public static final int unexpected_error=0x7f0b004d;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f0c0000;

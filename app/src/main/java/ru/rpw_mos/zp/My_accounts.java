@@ -45,15 +45,6 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
         return f;
     }
 
-    // private void CheckHost() {
-    // new Thread(new Runnable() {
-    // public void run() {
-    // mSiteIsAvailable = Tools
-    // .isConnected(getString(R.string.host_to_get_list));
-    // }
-    // }).start();
-    //
-    // }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -87,19 +78,6 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
                     Toast.LENGTH_LONG).show();
             return;
         }
-        // ConnectivityManager cm = (ConnectivityManager) getActivity()
-        // .getSystemService(Context.CONNECTIVITY_SERVICE);
-        // NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-
-        // проверяем хост по активной сети
-        // boolean isHostAlive = cm.requestRouteToHost(activeNetwork.getType(),
-        // R.string.host_to_get_list);
-
-        // if (!mSiteIsAvailable) {
-        // Toast.makeText(getActivity(), "Сервер не доступен",
-        // Toast.LENGTH_LONG).show();
-        // return;
-        // }
 
         GetAcListTask galt = new GetAcListTask();
         galt.ctx = getActivity();

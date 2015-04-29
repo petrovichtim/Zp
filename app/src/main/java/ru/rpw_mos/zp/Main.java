@@ -11,8 +11,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Main extends ActionBarActivity implements
+public class Main extends AppCompatActivity implements
         AdapterView.OnItemClickListener {
 
     private static final String PAGE = "page";
@@ -124,14 +124,6 @@ public class Main extends ActionBarActivity implements
 
     }
 
-    // @Override
-    // protected void onStop() {
-    // if (mDb != null) {
-    // mDb.close();
-    // mDb = null;
-    // }
-    // super.onStop();
-    // }
     public static void CreateListDialog() {
 
         // array list
@@ -152,7 +144,7 @@ public class Main extends ActionBarActivity implements
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
         builder.setTitle("Выберите расчет для загрузки")
-                .setCancelable(false)
+                .setCancelable(true)
                 .setPositiveButton("Скачать",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -252,7 +244,7 @@ public class Main extends ActionBarActivity implements
         } else {
             new AlertDialog.Builder(this)
                     .setMessage("Вы действительно хотите покинуть программу?")
-                    .setCancelable(false)
+                    .setCancelable(true)
                     .setPositiveButton("Да",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,
