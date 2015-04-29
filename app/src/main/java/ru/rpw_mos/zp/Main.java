@@ -128,8 +128,8 @@ public class Main extends AppCompatActivity implements
 
         // array list
 
-        ArrayList<String> checkAcListName = new ArrayList<String>();
-        final ArrayList<String> checkAcListID = new ArrayList<String>();
+        ArrayList<String> checkAcListName = new ArrayList<>();
+        final ArrayList<String> checkAcListID = new ArrayList<>();
 
         for (HashMap<String, String> hash : accountsList) {
             checkAcListName.add(hash.get("name"));

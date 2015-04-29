@@ -1526,29 +1526,18 @@ containing a value of this type.
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020039;
         public static final int abc_textfield_search_material=0x7f02003a;
         public static final int andy_tools_hammer_spanner=0x7f02003b;
-        public static final int drawer_shadow=0x7f02003c;
-        public static final int ic_btn_search_go=0x7f02003d;
-        public static final int ic_drawer=0x7f02003e;
-        public static final int ic_menu_print=0x7f02003f;
-        public static final int ic_menu_refresh=0x7f020040;
-        public static final int ic_menu_search=0x7f020041;
-        public static final int ic_menu_share=0x7f020042;
-        public static final int ico96=0x7f020043;
-        public static final int menu=0x7f020044;
-        public static final int menu_settings=0x7f020045;
-        public static final int palace=0x7f020046;
-        public static final int raschet_chern=0x7f020047;
-        public static final int raschet_korichn=0x7f020048;
-        public static final int raschet_ser=0x7f020049;
-        public static final int rascheti_chern=0x7f02004a;
-        public static final int rascheti_korichn=0x7f02004b;
-        public static final int rascheti_ser=0x7f02004c;
-        public static final int stoimost_moi_1=0x7f02004d;
-        public static final int stoimost_moi_1_2=0x7f02004e;
-        public static final int stoimost_rascheti_druzej_1=0x7f02004f;
-        public static final int stoimost_rascheti_druzej_2=0x7f020050;
-        public static final int stoimost_rascheti_druzej_3=0x7f020051;
-        public static final int theory=0x7f020052;
+        public static final int ic_btn_search_go=0x7f02003c;
+        public static final int ic_menu_print=0x7f02003d;
+        public static final int ic_menu_refresh=0x7f02003e;
+        public static final int ic_menu_search=0x7f02003f;
+        public static final int ic_menu_share=0x7f020040;
+        public static final int ico96=0x7f020041;
+        public static final int menu=0x7f020042;
+        public static final int menu_settings=0x7f020043;
+        public static final int palace=0x7f020044;
+        public static final int raschet_ser=0x7f020045;
+        public static final int rascheti_ser=0x7f020046;
+        public static final int theory=0x7f020047;
     }
     public static final class id {
         public static final int Blog_View=0x7f090051;
@@ -1572,9 +1561,8 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09003d;
         public static final int action_mode_bar_stub=0x7f09003c;
         public static final int action_mode_close_button=0x7f090025;
-        public static final int action_search=0x7f09007b;
         public static final int activity_chooser_view_content=0x7f090026;
-        public static final int add_account=0x7f09007c;
+        public static final int add_account=0x7f09007b;
         public static final int alertTitle=0x7f090030;
         public static final int always=0x7f090016;
         public static final int beginning=0x7f090013;
@@ -1729,8 +1717,7 @@ containing a value of this type.
         public static final int ac_exp_menu=0x7f0d0000;
         public static final int ac_item_menu=0x7f0d0001;
         public static final int comrads_ac_menu=0x7f0d0002;
-        public static final int main=0x7f0d0003;
-        public static final int my_ac_menu=0x7f0d0004;
+        public static final int my_ac_menu=0x7f0d0003;
     }
     public static final class string {
         public static final int AboutText=0x7f0b0000;

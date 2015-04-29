@@ -98,7 +98,7 @@ public class DbAdapter {
 
         Log.d(TAG, "Upgrading complete!");
 
-        pref.edit().putInt(DB_VERSION_TAG, DB_VERSION).commit();
+        pref.edit().putInt(DB_VERSION_TAG, DB_VERSION).apply();
         // Mark that everything has been done correctly
 
     }
@@ -415,7 +415,7 @@ public class DbAdapter {
             File dbFile = new File(DB_PATH);
             return dbFile.exists();
             /*
-			 * была такая проверка но она не работает в 2.2 и ниже
+             * была такая проверка но она не работает в 2.2 и ниже
 			 * SQLiteDatabase checkDB = null;
 			 * 
 			 * try { String myPath = DB_PATH;// + DB_NAME; checkDB =
