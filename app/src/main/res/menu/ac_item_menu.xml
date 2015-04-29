@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+      <item
+        android:id="@+id/save_account"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="@string/ac_save"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/share_account"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/Share_text"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/send_account"
+        android:icon="@android:drawable/ic_menu_send"
+        android:title="@string/ac_send"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/delete_account"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="@string/ac_delete"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/print_account"
+        android:icon="@drawable/ic_menu_print"
+        android:title="@string/ac_print"
+        app:showAsAction="ifRoom">
+    </item>
+    
+
+</menu>

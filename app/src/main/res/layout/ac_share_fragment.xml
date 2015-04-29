@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="500dp"
+    android:layout_height="300dp"
+    android:background="@drawable/palace"
+    android:minHeight="50dp" >
+
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:lines="1"
+        android:paddingLeft="3dip"
+        android:text="Мой расчет стоимости рабочей силы"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:paddingBottom="3dp"
+        android:text="Сделай свой расчёт стоимости www.r-p-w.ru/app"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@android:id/text1"
+        android:paddingLeft="3dp"
+        android:text="Название расчета"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_region"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tv_name"
+        android:paddingLeft="3dp"
+        android:text="Регион расчета"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tv_region"
+        android:paddingLeft="3dp"
+        android:text="Дата расчета"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tv_date"
+        android:paddingLeft="3dp"
+        android:text="Общая сумма всех затрат"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_zp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tv_total"
+        android:paddingLeft="3dp"
+        android:text="В пересчете на месяц"
+        android:textColor="@color/black" />
+
+</RelativeLayout>
