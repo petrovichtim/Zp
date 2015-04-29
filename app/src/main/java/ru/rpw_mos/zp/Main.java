@@ -67,7 +67,7 @@ public class Main extends ActionBarActivity implements
         drawerList.setAdapter(new MenuAdapter(this, R.layout.drawer_list_item,
                 R.array.menu_items, R.array.menu_icons));
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-                R.drawable.ic_drawer, 0) {
+                R.string.ns_menu_open, R.string.ns_menu_close) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -140,8 +140,8 @@ public class Main extends ActionBarActivity implements
         final ArrayList<String> checkAcListID = new ArrayList<String>();
 
         for (HashMap<String, String> hash : accountsList) {
-            checkAcListName.add(hash.get("name").toString());
-            checkAcListID.add(hash.get("id").toString());
+            checkAcListName.add(hash.get("name"));
+            checkAcListID.add(hash.get("id"));
 
         }
 
@@ -161,7 +161,7 @@ public class Main extends ActionBarActivity implements
                                 for (boolean ChechId : mCheckedItems) {
                                     if (ChechId)
                                         ListID.add(checkAcListID.get(i)
-                                                .toString());
+                                        );
                                     i++;
                                 }
                                 if (ListID.size() > 0) {

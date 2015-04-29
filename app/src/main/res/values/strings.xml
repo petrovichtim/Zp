@@ -6,7 +6,7 @@
     <string name="settings">Настройки</string>
     <string name="theory">Теория</string>
     <string name="practice">Практика</string>
-    
+
     <string name="app_name">Расчёт зарплаты</string>
     <string name="action_about">О программе</string>
     <string name="sp_text">Список расчетов</string>
@@ -25,8 +25,9 @@
     <string name="title_activity_about">О программе</string>
     <string name="title_activity_account">Расчёт</string>
     <string name="Choose_email_client">Выберите приложение для отправки сообщения:</string>
-   
-   
+    <string name="ns_menu_open">Открыть</string>
+    <string name="ns_menu_close">Закрыть</string>
+
     <string name="Link_to_vote"><a name="Будем очень признательны за оставленные комментарии и оценки">https://play.google.com/store/apps/details?id=com.rusdelphi.burdic.lite</a></string>
     <string name="URL_to_vote">https://play.google.com/store/apps/details?id=com.rusdelphi.burdic.lite</string>
     <string name="Text_to_vote">Будем очень признательны за оставленные комментарии и оценки</string>
@@ -38,10 +39,10 @@
     <string name="Vote_text_ok">Оценить!</string>
     <string name="Vote_text_cancel">Не хочу :-(</string>
     <string name="Vote_text">Вам понравилось наше приложение?\nОцените его в Google Play!\nНам, как вашим соотечественникам, будет очень приятно!</string>
-   
+
     <string name="ac_name">Название рассчета</string>
     <string name="ac_region">Населенный пункт/регион</string>
-    
+
     <string name="ac_save">Сохранить</string>
     <string name="ac_delete">Удалить рассчет</string>
     <string name="ac_list">Список затрат</string>
@@ -56,8 +57,8 @@
     <string name="ac_send">Отправить расчет на сайт</string>
     <string name="acl_error">Сохраните расчет</string>
     <string name="acl_save_error">Заполните все поля расчета</string>
-    
-    
+
+
     <string name="acl_text">Статья расходов</string>
     <string name="acli_text">В расчете на месяц</string>
     <string name="host_to_send">http://rpw-mos.ru/write_account.php</string>
@@ -66,9 +67,9 @@
     <string name="unexpected_error">Непредвиденная ошибка</string>
     <string name="download_error">Ошибка при получении списка расчетов</string>
     <!-- Теория -->
-     <string name="theory_text">Заработная плата, как известно, – это цена рабочей силы. Объективной основой цены рабочей силы служит стоимость рабочей силы. Стоимость рабочей силы определяется, в свою очередь, стоимостью жизненных средств, необходимых для нормального воспроизводства работника и членов его семьи. Для определения величины стоимости рабочей силы в расчете на месяц её использования необходимо учесть все затраты на воспроизводство работника и членов его семьи за время трудовой деятельности, исчисляя их в расчете на месяц, и просуммировать. Принимаемое в расчет время трудовой деятельности — 25 лет, состав семьи — 5 человек (трое детей), исходя из государственных требований обеспечения нормального воспроизводства населения России. </string>
-    
+    <string name="theory_text">Заработная плата, как известно, – это цена рабочей силы. Объективной основой цены рабочей силы служит стоимость рабочей силы. Стоимость рабочей силы определяется, в свою очередь, стоимостью жизненных средств, необходимых для нормального воспроизводства работника и членов его семьи. Для определения величины стоимости рабочей силы в расчете на месяц её использования необходимо учесть все затраты на воспроизводство работника и членов его семьи за время трудовой деятельности, исчисляя их в расчете на месяц, и просуммировать. Принимаемое в расчет время трудовой деятельности — 25 лет, состав семьи — 5 человек (трое детей), исходя из государственных требований обеспечения нормального воспроизводства населения России. </string>
+
     <!-- Практика -->
     <string name="practice_text">В настоящее время, данный расчет применяется на ряде предприятий при расчете заработной платы.</string>
-   
+
 </resources>
