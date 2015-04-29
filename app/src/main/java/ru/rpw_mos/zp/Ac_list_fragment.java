@@ -14,92 +14,92 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 public class Ac_list_fragment extends Fragment implements
-		LoaderCallbacks<Cursor> {
+        LoaderCallbacks<Cursor> {
 
-	private ListView mListView;
-	static Loader<Cursor> loadermanager;
-	MySimpleCursorAdapter sca;
-	private static final String[] FROM = new String[] { "name", };
-	private static final int[] TO = new int[] { R.id.name };
+    private ListView mListView;
+    static Loader<Cursor> loadermanager;
+    MySimpleCursorAdapter sca;
+    private static final String[] FROM = new String[]{"name",};
+    private static final int[] TO = new int[]{R.id.name};
 
-	public static Ac_list_fragment getInstance() {
-		Ac_list_fragment f = new Ac_list_fragment();
-		Bundle args = new Bundle();
-		f.setArguments(args);
-		return f;
-	}
+    public static Ac_list_fragment getInstance() {
+        Ac_list_fragment f = new Ac_list_fragment();
+        Bundle args = new Bundle();
+        f.setArguments(args);
+        return f;
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		loadermanager = getActivity().getSupportLoaderManager().restartLoader(
-				0, null, this);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        loadermanager = getActivity().getSupportLoaderManager().restartLoader(
+                0, null, this);
+    }
 
-	public static void UpdateAc() {
-		loadermanager.forceLoad();
-	}
+    public static void UpdateAc() {
+        loadermanager.forceLoad();
+    }
 
-	@Override
-	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		setTitle(R.string.acl_text, null);
-	}
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setTitle(R.string.acl_text, null);
+    }
 
-	public void setTitle(int titleId, CharSequence subtitle) {
-		setTitle(getActivity().getString(titleId), subtitle);
-	}
+    public void setTitle(int titleId, CharSequence subtitle) {
+        setTitle(getActivity().getString(titleId), subtitle);
+    }
 
-	public void setTitle(CharSequence title, CharSequence subtitle) {
-		if (getActivity() instanceof ActionBarActivity) {
-			ActionBar actionBar = ((ActionBarActivity) getActivity())
-					.getSupportActionBar();
-			actionBar.setTitle(title);
-			actionBar.setSubtitle(subtitle);
-		} else {
-			getActivity().setTitle(title);
-		}
-	}
+    public void setTitle(CharSequence title, CharSequence subtitle) {
+        if (getActivity() instanceof ActionBarActivity) {
+            ActionBar actionBar = ((ActionBarActivity) getActivity())
+                    .getSupportActionBar();
+            actionBar.setTitle(title);
+            actionBar.setSubtitle(subtitle);
+        } else {
+            getActivity().setTitle(title);
+        }
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.accounts_list_fragment,
-				container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.accounts_list_fragment,
+                container, false);
 
-		mListView = (ListView) rootView.findViewById(R.id.counts_list);
+        mListView = (ListView) rootView.findViewById(R.id.counts_list);
 
-		sca = new MySimpleCursorAdapter(getActivity(),
-				R.layout.exp_list_item_fragment, null, FROM, TO, 0);
+        sca = new MySimpleCursorAdapter(getActivity(),
+                R.layout.exp_list_item_fragment, null, FROM, TO, 0);
 
-		mListView.setAdapter(sca);
-		// mListView.setOnItemClickListener(new
-		// AdapterView.OnItemClickListener() {
-		// @Override
-		// public void onItemClick(AdapterView<?> adapterView, View view,
-		// int i, long l) {
-		// Main.mAccount_id = l;
-		// ViewAccountFragment();
-		// }
-		//
-		// });
-		UpdateAc();
-		return rootView;
-	}
+        mListView.setAdapter(sca);
+        // mListView.setOnItemClickListener(new
+        // AdapterView.OnItemClickListener() {
+        // @Override
+        // public void onItemClick(AdapterView<?> adapterView, View view,
+        // int i, long l) {
+        // Main.mAccount_id = l;
+        // ViewAccountFragment();
+        // }
+        //
+        // });
+        UpdateAc();
+        return rootView;
+    }
 
-	@Override
-	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		return new MyCursorLoader(getActivity(), Main.mDb, R.string.ac_list);
-	}
+    @Override
+    public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+        return new MyCursorLoader(getActivity(), Main.mDb, R.string.ac_list);
+    }
 
-	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		sca.swapCursor(cursor);
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        sca.swapCursor(cursor);
 
-	}
+    }
 
-	@Override
-	public void onLoaderReset(Loader<Cursor> arg0) {
+    @Override
+    public void onLoaderReset(Loader<Cursor> arg0) {
 
-	}
+    }
 }

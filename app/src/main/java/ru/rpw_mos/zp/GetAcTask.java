@@ -1,7 +1,10 @@
 package ru.rpw_mos.zp;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -9,113 +12,110 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GetAcTask extends AsyncTask<String, Integer, String> {
-	ProgressDialog progressDialog;
-	public Context ctx;
+    ProgressDialog progressDialog;
+    public Context ctx;
 
-	// Creating JSON Parser object
-	JSONParser jParser = new JSONParser();
+    // Creating JSON Parser object
+    JSONParser jParser = new JSONParser();
 
-	// JSON Node names
-	private static final String TAG_SUCCESS = "success";
-	private static final String TAG_ACCOUNTS = "accounts";
-	private static final String TAG_ID = "id";
-	private static final String TAG_NAME = "name";
-	private static final String TAG_REGION = "region";
-	private static final String TAG_DATE = "date";
+    // JSON Node names
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_ACCOUNTS = "accounts";
+    private static final String TAG_ID = "id";
+    private static final String TAG_NAME = "name";
+    private static final String TAG_REGION = "region";
+    private static final String TAG_DATE = "date";
 
-	// products JSONArray
-	JSONArray products = null;
+    // products JSONArray
+    JSONArray products = null;
 
-	@Override
-	protected String doInBackground(String... args) {
+    @Override
+    protected String doInBackground(String... args) {
 
-		// Building Parameters
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("ids", args[0]));
-		Log.d("main", "GetAcTask doInBackground args[0]=" + args[0]);
-		// getting JSON string from URL
-		JSONObject json = jParser.makeHttpRequest(
-				ctx.getString(R.string.host_to_get_ac), "POST", params);
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("ids", args[0]));
+        Log.d("main", "GetAcTask doInBackground args[0]=" + args[0]);
+        // getting JSON string from URL
+        JSONObject json = jParser.makeHttpRequest(
+                ctx.getString(R.string.host_to_get_ac), "POST", params);
 
-		// Check your log cat for JSON reponse
-		Log.d("All Products: ", json.toString());
+        // Check your log cat for JSON reponse
+        Log.d("All Products: ", json.toString());
 
-		try {
-			// Checking for SUCCESS TAG
-			int success = json.getInt(TAG_SUCCESS);
+        try {
+            // Checking for SUCCESS TAG
+            int success = json.getInt(TAG_SUCCESS);
 
-			if (success == 1) {
-				// products found
-				// Getting Array of Products
-				products = json.getJSONArray(TAG_ACCOUNTS);
+            if (success == 1) {
+                // products found
+                // Getting Array of Products
+                products = json.getJSONArray(TAG_ACCOUNTS);
 
-				// looping through All Products
-				for (int i = 0; i < products.length(); i++) {
-					JSONObject c = products.getJSONObject(i);
+                // looping through All Products
+                for (int i = 0; i < products.length(); i++) {
+                    JSONObject c = products.getJSONObject(i);
 
-					// Storing each json item in variable
-					String sys_id = c.getString(TAG_ID); // òóò sys_id äëÿ
-															// ëîêàëüíîé áä
-					String name = c.getString(TAG_NAME);
-					String region = c.getString(TAG_REGION);
-					String date = c.getString(TAG_DATE);
+                    // Storing each json item in variable
+                    String sys_id = c.getString(TAG_ID); // Ñ‚ÑƒÑ‚ sys_id Ð´Ð»Ñ
+                    // Ð»Ð¾ÐºÐ°Ð»ÑŒÐ½Ð¾Ð¹ Ð±Ð´
+                    String name = c.getString(TAG_NAME);
+                    String region = c.getString(TAG_REGION);
+                    String date = c.getString(TAG_DATE);
 
-					// òóò íàäî èíñåðò â áàçó ñäåëàòü
-					long ac_id = Main.mDb.insertAccount(name, region, date,
-							sys_id, 0); // âñòàâèëè
-					// ðàñ÷åò
-					// òóò â öèêëå íàäî ïðîáåæàòü ïî çàòðàòàì
-					for (int j = 1; j < 36; j++) {
-						String exp_id = String.valueOf(j);
-						String sum = c.getString(exp_id);
+                    // Ñ‚ÑƒÑ‚ Ð½Ð°Ð´Ð¾ Ð¸Ð½ÑÐµÑ€Ñ‚ Ð² Ð±Ð°Ð·Ñƒ ÑÐ´ÐµÐ»Ð°Ñ‚ÑŒ
+                    long ac_id = Main.mDb.insertAccount(name, region, date,
+                            sys_id, 0); // Ð²ÑÑ‚Ð°Ð²Ð¸Ð»Ð¸
+                    // Ñ€Ð°ÑÑ‡ÐµÑ‚
+                    // Ñ‚ÑƒÑ‚ Ð² Ñ†Ð¸ÐºÐ»Ðµ Ð½Ð°Ð´Ð¾ Ð¿Ñ€Ð¾Ð±ÐµÐ¶Ð°Ñ‚ÑŒ Ð¿Ð¾ Ð·Ð°Ñ‚Ñ€Ð°Ñ‚Ð°Ð¼
+                    for (int j = 1; j < 36; j++) {
+                        String exp_id = String.valueOf(j);
+                        String sum = c.getString(exp_id);
 
-						Main.mDb.updateImportExp(sum, exp_id,
-								String.valueOf(ac_id));
+                        Main.mDb.updateImportExp(sum, exp_id,
+                                String.valueOf(ac_id));
 
-					}
-				}
-				return "Êîëëè÷åñòâî ñîõðàíåííûõ ðàñ÷åòîâ: " + products.length();
-			} else {
-				return "Îøèáêà ñîõðàíåíèÿ ðàñ÷åòîâ";
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+                    }
+                }
+                return "ÐšÐ¾Ð»Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð½Ñ‹Ñ… Ñ€Ð°ÑÑ‡ÐµÑ‚Ð¾Ð²: " + products.length();
+            } else {
+                return "ÐžÑˆÐ¸Ð±ÐºÐ° ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ñ€Ð°ÑÑ‡ÐµÑ‚Ð¾Ð²";
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	protected void onPreExecute() {
-		progressDialog = new ProgressDialog(ctx);
-		progressDialog.setMessage("Ïîëó÷åíèå äàííûõ ...");
-		progressDialog.setIndeterminate(false);
-		progressDialog.setCancelable(true);
-		progressDialog.show();
-		super.onPreExecute();
-	}
+    @Override
+    protected void onPreExecute() {
+        progressDialog = new ProgressDialog(ctx);
+        progressDialog.setMessage("ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ… ...");
+        progressDialog.setIndeterminate(false);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+        super.onPreExecute();
+    }
 
-	@Override
-	protected void onPostExecute(String result) {
-		if (result != null) {// ýòî îòâåò
-			progressDialog.hide();
-			progressDialog.dismiss();
-			Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
-			My_accounts.UpdateAc();
-			super.onPostExecute(result);
-			return;
-		}
-		progressDialog.hide();
-		progressDialog.dismiss();
-		super.onPostExecute(result);
+    @Override
+    protected void onPostExecute(String result) {
+        if (result != null) {// ÑÑ‚Ð¾ Ð¾Ñ‚Ð²ÐµÑ‚
+            progressDialog.hide();
+            progressDialog.dismiss();
+            Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
+            My_accounts.UpdateAc();
+            super.onPostExecute(result);
+            return;
+        }
+        progressDialog.hide();
+        progressDialog.dismiss();
+        super.onPostExecute(result);
 
-	}
+    }
 
 }

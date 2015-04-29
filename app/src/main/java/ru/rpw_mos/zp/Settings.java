@@ -50,7 +50,7 @@ public class Settings extends Fragment {
 	}
 
 	public void Send_Email() {
-		Intent sendMail = new Intent(android.content.Intent.ACTION_SEND);
+		Intent sendMail = new Intent(Intent.ACTION_SEND);
 		sendMail.setType("plain/text");
 		sendMail.putExtra(Intent.EXTRA_EMAIL,
 				new String[] { "rpw.mos@gmail.com" });

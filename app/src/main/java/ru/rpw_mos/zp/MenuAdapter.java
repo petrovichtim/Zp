@@ -14,6 +14,7 @@ public class MenuAdapter extends BaseAdapter {
     private final int layoutId;
     private final String[] text;
     private final Drawable[] icons;
+
     public MenuAdapter(Context c, int layoutId, int textsResId, int iconsResId) {
         text = c.getResources().getStringArray(textsResId);
         this.layoutId = layoutId;

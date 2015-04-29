@@ -139,29 +139,29 @@ public class Ac_fragment extends Fragment {
 
     private void PrintAccount() {
         String file_rtf = Tools.LoadData("template.rtf", getActivity());
-        // �������� ������ ��� ��������
+        // получить данные для отправки
         mCursor = Main.mDb.getListAccount(Main.mAccount_id);
         mCursor.moveToFirst();
         String file_name = mCursor.getString(mCursor.getColumnIndex("name"))
-
+                .toString()
                 + "_"
-                + mCursor.getString(mCursor.getColumnIndex("date"))
+                + mCursor.getString(mCursor.getColumnIndex("date")).toString()
                 + ".rtf";
         file_rtf = replaceString(file_rtf, "name",
-                mCursor.getString(mCursor.getColumnIndex("name")));
+                mCursor.getString(mCursor.getColumnIndex("name")).toString());
         file_rtf = replaceString(file_rtf, "region",
-                mCursor.getString(mCursor.getColumnIndex("region")));
+                mCursor.getString(mCursor.getColumnIndex("region")).toString());
         file_rtf = replaceString(file_rtf, "date",
-                mCursor.getString(mCursor.getColumnIndex("date")));
+                mCursor.getString(mCursor.getColumnIndex("date")).toString());
         file_rtf = replaceString(file_rtf, "total",
-                mCursor.getString(mCursor.getColumnIndex("total")));
+                mCursor.getString(mCursor.getColumnIndex("total")).toString());
         file_rtf = replaceString(file_rtf, "zp",
-                mCursor.getString(mCursor.getColumnIndex("zp")));
+                mCursor.getString(mCursor.getColumnIndex("zp")).toString());
         int i = 1;
         for (mCursor.moveToFirst(); !mCursor.isAfterLast(); mCursor
                 .moveToNext()) {
             file_rtf = replaceString(file_rtf, "sum" + i,
-                    mCursor.getString(mCursor.getColumnIndex("sum")));
+                    mCursor.getString(mCursor.getColumnIndex("sum")).toString());
             i++;
         }
 
@@ -171,7 +171,7 @@ public class Ac_fragment extends Fragment {
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
         sendIntent.setType("*/*");
-        startActivity(Intent.createChooser(sendIntent, "���������� ������"));
+        startActivity(Intent.createChooser(sendIntent, "Поделиться файлом"));
 
     }
 
@@ -187,7 +187,7 @@ public class Ac_fragment extends Fragment {
 
     private void SendAccount() {
         if (!Tools.isOnline(getActivity())) {
-            Toast.makeText(getActivity(), "���������� ��������",
+            Toast.makeText(getActivity(), "Подключите интернет",
                     Toast.LENGTH_LONG).show();
             return;
         }
@@ -195,26 +195,25 @@ public class Ac_fragment extends Fragment {
         // .getSystemService(Context.CONNECTIVITY_SERVICE);
         // NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
-        // ��������� ���� �� �������� ����
+        // проверяем хост по активной сети
         // boolean isHostAlive = cm.requestRouteToHost(activeNetwork.getType(),
         // R.string.host_to_send);
         // if (!mSiteIsAvailable) {
-        // Toast.makeText(getActivity(), "������ �� ��������",
+        // Toast.makeText(getActivity(), "Сервер не доступен",
         // Toast.LENGTH_LONG).show();
         // return;
         // }
 
-        // �������� ������ ��� ��������
+        // получить данные для отправки
         mCursor = Main.mDb.getListAccount(Main.mAccount_id);
         mCursor.moveToFirst();
-        // ��������� sys_id �� NULL
+        // проверяем sys_id на NULL
         String tmp = mCursor.getString(mCursor.getColumnIndex("sys_id"));
 
         if (tmp != null && tmp.length() != 0) {
-            Toast.makeText(getActivity(), "������ ��� ��������� �� ������",
+            Toast.makeText(getActivity(), "Расчет уже отправлен на сервер",
                     Toast.LENGTH_LONG).show();
             return;
-
         }
         mDataList.clear();
         mDataList.add(mCursor.getString(mCursor.getColumnIndex("name")));
@@ -291,15 +290,15 @@ public class Ac_fragment extends Fragment {
         View share_view = Inflater.inflate(R.layout.ac_share_fragment, null,
                 false);
         TextView tv_name = (TextView) share_view.findViewById(R.id.tv_name);
-        tv_name.setText("�������� ������� : " + en.getText());
+        tv_name.setText("Название расчета : " + en.getText());
         TextView tv_region = (TextView) share_view.findViewById(R.id.tv_region);
-        tv_region.setText("������ ������� : " + er.getText());
+        tv_region.setText("Регион расчета : " + er.getText());
         TextView tv_date = (TextView) share_view.findViewById(R.id.tv_date);
-        tv_date.setText("���� ������� : " + ed.getText());
+        tv_date.setText("Дата расчета : " + ed.getText());
         TextView tv_total = (TextView) share_view.findViewById(R.id.tv_total);
-        tv_total.setText("����� ����� ���� ������ : " + tv_ac_itog.getText());
+        tv_total.setText("Общая сумма всех затрат : " + tv_ac_itog.getText());
         TextView tv_zp = (TextView) share_view.findViewById(R.id.tv_zp);
-        tv_zp.setText("� ��������� �� ����� : " + tv_ac_zp.getText());
+        tv_zp.setText("В пересчете на месяц : " + tv_ac_zp.getText());
 
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("image/jpeg");
@@ -312,10 +311,10 @@ public class Ac_fragment extends Fragment {
         share.putExtra(Intent.EXTRA_STREAM, uri);
         if (canShareText(true, share)) {
             startActivityForResult(
-                    Intent.createChooser(share, "���������� � �������"), 0);
+                    Intent.createChooser(share, "Поделиться с помощью"), 0);
         } else {
             Toast.makeText(getActivity(),
-                    "���������� ���������� ���������� � ��������� �������",
+                    "Установите социальные приложения и повторите попытку",
                     Toast.LENGTH_LONG).show();
         }
 
