@@ -57,7 +57,7 @@ public class Main extends AppCompatActivity implements
         accountsList = new ArrayList<HashMap<String, String>>();
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //
         actionBar.setHomeButtonEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources()
                 .getColor(R.color.header_bg)));
@@ -71,7 +71,7 @@ public class Main extends AppCompatActivity implements
             drawerLayout.setScrimColor(Color.TRANSPARENT);
             isDrawerLocked = true;
         }
-
+        actionBar.setDisplayHomeAsUpEnabled(!isDrawerLocked);
         drawerList.setOnItemClickListener(this);
         drawerList.setAdapter(new MenuAdapter(this, R.layout.drawer_list_item,
                 R.array.menu_items, R.array.menu_icons));
@@ -92,10 +92,6 @@ public class Main extends AppCompatActivity implements
         };
         drawerLayout.setDrawerListener(drawerToggle);
 
-        if (!isDrawerLocked) {
-
-
-        }
         loadSettings();
         if (mDb == null)
             mDb = new DbAdapter(this).open();
@@ -237,7 +233,11 @@ public class Main extends AppCompatActivity implements
                 pendingFragment = Settings.getInstance();
                 break;
         }
-        drawerLayout.closeDrawers();
+        if (!isDrawerLocked)
+            drawerLayout.closeDrawers();
+        else {
+            loadFragment();
+        }
     }
 
     @Override
