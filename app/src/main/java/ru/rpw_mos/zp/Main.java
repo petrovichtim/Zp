@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -46,6 +47,7 @@ public class Main extends AppCompatActivity implements
     public static String Name_item;
     public static String Desc_item;
     public static String Sum_item;
+    private boolean isDrawerLocked = false;
 
     @Override
     public void onCreate(Bundle saved) {
@@ -63,6 +65,13 @@ public class Main extends AppCompatActivity implements
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.left_drawer);
+        if (drawerLayout.getLayoutParams().width == (int) getResources().getDimension(R.dimen.drawer_size)) {
+
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, drawerList);
+            drawerLayout.setScrimColor(Color.TRANSPARENT);
+            isDrawerLocked = true;
+        }
+
         drawerList.setOnItemClickListener(this);
         drawerList.setAdapter(new MenuAdapter(this, R.layout.drawer_list_item,
                 R.array.menu_items, R.array.menu_icons));
@@ -81,8 +90,12 @@ public class Main extends AppCompatActivity implements
                 mDraverCliked = false;
             }
         };
-
         drawerLayout.setDrawerListener(drawerToggle);
+
+        if (!isDrawerLocked) {
+
+
+        }
         loadSettings();
         if (mDb == null)
             mDb = new DbAdapter(this).open();

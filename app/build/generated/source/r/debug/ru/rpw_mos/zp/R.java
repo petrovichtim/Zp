@@ -1464,6 +1464,8 @@ containing a value of this type.
         public static final int dialog_fixed_width_minor=0x7f080041;
         public static final int disabled_alpha_material_dark=0x7f080042;
         public static final int disabled_alpha_material_light=0x7f080043;
+        public static final int drawer_content_padding=0x7f080044;
+        public static final int drawer_size=0x7f080045;
     }
     public static final class drawable {
         public static final int abc_ab_share_pack_mtrl_alpha=0x7f020000;
@@ -1529,15 +1531,14 @@ containing a value of this type.
         public static final int ic_btn_search_go=0x7f02003c;
         public static final int ic_menu_print=0x7f02003d;
         public static final int ic_menu_refresh=0x7f02003e;
-        public static final int ic_menu_search=0x7f02003f;
-        public static final int ic_menu_share=0x7f020040;
-        public static final int ico96=0x7f020041;
-        public static final int menu=0x7f020042;
-        public static final int menu_settings=0x7f020043;
-        public static final int palace=0x7f020044;
-        public static final int raschet_ser=0x7f020045;
-        public static final int rascheti_ser=0x7f020046;
-        public static final int theory=0x7f020047;
+        public static final int ic_menu_share=0x7f02003f;
+        public static final int ico96=0x7f020040;
+        public static final int menu=0x7f020041;
+        public static final int menu_settings=0x7f020042;
+        public static final int palace=0x7f020043;
+        public static final int raschet_ser=0x7f020044;
+        public static final int rascheti_ser=0x7f020045;
+        public static final int theory=0x7f020046;
     }
     public static final class id {
         public static final int Blog_View=0x7f090051;
