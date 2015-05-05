@@ -1,6 +1,8 @@
 package ru.rpw_mos.zp;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,8 +15,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class Settings extends Fragment {
     int mClickCount = 0;
@@ -70,6 +76,40 @@ public class Settings extends Fragment {
         mIv.startAnimation(sampleFadeAnimation);
     }
 
+    boolean canShareText(boolean allowSmsMms, Intent intent) {
+        PackageManager manager = getActivity().getPackageManager();
+        List<ResolveInfo> list = manager.queryIntentActivities(intent, 0);
+
+        if (list != null && list.size() > 0) {
+            if (allowSmsMms)
+                return true;
+            int handlersCount = 0;
+            for (ResolveInfo li : list) {
+                if (li != null && li.activityInfo != null
+                        && li.activityInfo.packageName != null
+                        && li.activityInfo.packageName == "com.android.mms") {
+                } else
+                    ++handlersCount;
+            }
+            if (handlersCount > 0)
+                return true;
+        }
+        return false;
+    }
+
+    public void shareButtonClick() {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.putExtra(Intent.EXTRA_TEXT, getString(R.string.URL_to_vote));
+        share.setType("text/plain");
+        if (canShareText(true, share)) {
+            startActivityForResult(Intent.createChooser(share, getString(R.string.Share_via)), 0);
+        } else {
+            Toast.makeText(getActivity(), R.string.Share_error, Toast.LENGTH_LONG)
+                    .show();
+        }
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -101,6 +141,13 @@ public class Settings extends Fragment {
                 mClickCount++;
                 if (mClickCount % 3 == 0)
                     rotateImage();
+            }
+        });
+        Button shareButton = (Button) rootView.findViewById(R.id.Share_button_ac);
+        shareButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareButtonClick();
             }
         });
         return rootView;

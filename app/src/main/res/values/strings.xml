@@ -27,11 +27,12 @@
     <string name="Choose_email_client">Выберите приложение для отправки сообщения:</string>
     <string name="ns_menu_open">Открыть</string>
     <string name="ns_menu_close">Закрыть</string>
+    <string name="Share_via">Поделиться с помощью</string>
 
     <string name="Link_to_vote"><a name="Будем очень признательны за оставленные комментарии и оценки">https://play.google.com/store/apps/details?id=com.rusdelphi.burdic.lite</a></string>
-    <string name="URL_to_vote">https://play.google.com/store/apps/details?id=com.rusdelphi.burdic.lite</string>
+    <string name="URL_to_vote">https://play.google.com/store/apps/details?id=ru.rpw_mos.zp</string>
+    <string name="Share_error">Установите социальные приложения и повторите попытку.</string>
     <string name="Text_to_vote">Будем очень признательны за оставленные комментарии и оценки</string>
-    <string name="Share_text_URL">https://itunes.apple.com/ru/app/burdiclite/id839196473</string>
     <string name="Share_text_ask">Вам понравилось наше приложение?\nРасскажите о нём свом друзьям и знакомыми!</string>
     <string name="Share_text_ok">Рассказать!</string>
     <string name="Share_text_cancel">Промолчу</string>
