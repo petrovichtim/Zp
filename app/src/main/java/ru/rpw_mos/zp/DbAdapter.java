@@ -21,6 +21,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//import android.util.Log;
+
 public class DbAdapter {
     private static final String DB_NAME = "zp.db";
     private static final String DB_TABLE_NAME = "accounts";
@@ -55,11 +57,11 @@ public class DbAdapter {
         SharedPreferences pref = c.getSharedPreferences(TAG,
                 Context.MODE_PRIVATE);
         if (!dbFile.exists()) {
-            Log.d(TAG, "DB doesn't exist");
+            //Log.d(TAG, "DB doesn't exist");
             dbFile.getParentFile().mkdirs();
             unpackDB = true;
         } else if (pref.getInt(DB_VERSION_TAG, 0) < DB_VERSION) {
-            Log.d(TAG, "Forcing updating DB");
+           // Log.d(TAG, "Forcing updating DB");
             unpackDB = true;
         }
 
@@ -72,7 +74,7 @@ public class DbAdapter {
     static void unpackDB(Context c) throws IOException {
         SharedPreferences pref = c.getSharedPreferences(TAG,
                 Context.MODE_PRIVATE);
-        Log.d(TAG, "Unpacking DB from assets");// to " +
+       // Log.d(TAG, "Unpacking DB from assets");// to " +
         // dbFile.getAbsolutePath());
 
         InputStream is = c.getAssets().open(DB_NAME);
@@ -96,7 +98,7 @@ public class DbAdapter {
             mDb = SQLiteDatabase.openDatabase(getDBPath(c), null,
                     SQLiteDatabase.OPEN_READWRITE);// OPEN_READONLY
 
-        Log.d(TAG, "Upgrading complete!");
+       // Log.d(TAG, "Upgrading complete!");
 
         pref.edit().putInt(DB_VERSION_TAG, DB_VERSION).apply();
         // Mark that everything has been done correctly
@@ -192,11 +194,11 @@ public class DbAdapter {
         if (mDb == null || !mDb.isOpen()) {
             try {
                 copyDBifNeeded(mContext);
-                Log.d(TAG, "Opening DB");
+                //Log.d(TAG, "Opening DB");
                 mDb = SQLiteDatabase.openDatabase(getDBPath(mContext), null,
                         SQLiteDatabase.OPEN_READWRITE);// OPEN_READONLY
             } catch (IOException e) {
-                Log.e(TAG, "bad DB", e);
+                //Log.e(TAG, "bad DB", e);
                 mDb = null;
             }
         }
@@ -275,7 +277,7 @@ public class DbAdapter {
             newValues.put("account_id", account_id);
             newValues.put("expenses_id", expenses_id);
             newValues.put("sum", sum);
-            Log.d("insert", "прошел инсерт insertExp");
+            //Log.d("insert", "прошел инсерт insertExp");
             return mDb.insert("expenses", null, newValues);
 
         }
@@ -304,7 +306,7 @@ public class DbAdapter {
             }
         }
         c.close();
-        Log.d("updateExp", "getSysAcList String=" + s.toString());
+        //Log.d("updateExp", "getSysAcList String=" + s.toString());
         if (s.length() > 1)
             s.deleteCharAt(s.length() - 1);
         return s.toString();

@@ -3,7 +3,6 @@ package ru.rpw_mos.zp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -39,13 +38,13 @@ public class GetAcTask extends AsyncTask<String, Integer, String> {
         params.put("ids", args[0]);
 
 
-        Log.d("main", "GetAcTask doInBackground args[0]=" + args[0]);
+        //Log.d("main", "GetAcTask doInBackground args[0]=" + args[0]);
         // getting JSON string from URL
         JSONObject json = jParser.makeHttpRequest(
                 ctx.getString(R.string.host_to_get_ac), "POST", params);
 
         // Check your log cat for JSON reponse
-        Log.d("All Products: ", json.toString());
+        //Log.d("All Products: ", json.toString());
 
         try {
             // Checking for SUCCESS TAG

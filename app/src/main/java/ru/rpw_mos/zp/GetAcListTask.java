@@ -3,7 +3,6 @@ package ru.rpw_mos.zp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -43,7 +42,7 @@ public class GetAcListTask extends AsyncTask<String, Integer, String> {
                 ctx.getString(R.string.host_to_get_list), "POST", params);
 
         // Check your log cat for JSON reponse
-        Log.d("All Products: ", json.toString());
+        //Log.d("All Products: ", json.toString());
 
         try {
             // Checking for SUCCESS TAG

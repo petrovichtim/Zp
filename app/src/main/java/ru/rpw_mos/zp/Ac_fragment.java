@@ -13,7 +13,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -132,7 +131,7 @@ public class Ac_fragment extends Fragment {
 
     public String replaceString(String input, String field, String value) {
         String result = "\\lang1049\\f0  " + getHexString(value);
-        Log.d("main", "result=" + result);
+       // Log.d("main", "result=" + result);
         input = input.replace(field, result);
         return input;
     }
@@ -252,10 +251,10 @@ public class Ac_fragment extends Fragment {
                 MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
         share_view.layout(0, 0, share_view.getMeasuredWidth(),
                 share_view.getMeasuredHeight());
-        Log.d("main",
-                "save_View_ToSDCard height=" + share_view.getMeasuredHeight());
-        Log.d("main",
-                "save_View_ToSDCard width=" + share_view.getMeasuredWidth());
+       // Log.d("main",
+      //          "save_View_ToSDCard height=" + share_view.getMeasuredHeight());
+      //  Log.d("main",
+      //          "save_View_ToSDCard width=" + share_view.getMeasuredWidth());
 
         share_view.buildDrawingCache(true);
 

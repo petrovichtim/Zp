@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -53,7 +52,7 @@ public class Tools {
             urlConnection.disconnect();
             return true;
         } catch (IOException e) {
-            Log.e(TAG, "Exception", e);
+            //Log.e(TAG, "Exception", e);
         }
         return false;
     }
@@ -71,21 +70,21 @@ public class Tools {
                         .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
                 fileName);
         if (!file.createNewFile()) {
-            Log.d("main", "File not created");
+            //Log.d("main", "File not created");
         }
         return file;
     }
 
     public static String SaveStringToFile(String inFile, Context ctx,
                                           String file_name) {
-        Log.d("main", "SaveStringToFile path=" + ctx.getFilesDir());
+       // Log.d("main", "SaveStringToFile path=" + ctx.getFilesDir());
         String s = null;
         try {
             File f = getDownloadsStorageDir(file_name);
             FileWriter out = new FileWriter(f);
             out.write(inFile);
             s = f.getAbsolutePath();
-            Log.d("main", "SaveStringToFile s=" + s);
+           // Log.d("main", "SaveStringToFile s=" + s);
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -186,10 +185,10 @@ public class Tools {
             InputStream is;
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 is = connection.getInputStream();
-                Log.d("main", "Получилось!");
+                //Log.d("main", "Получилось!");
                 String s = entityToString(is);
                 //
-                Log.d("main", "Ответ=" + s);
+               // Log.d("main", "Ответ=" + s);
 
             }
 
@@ -230,7 +229,7 @@ public class Tools {
             // connection.getOutputStream());
             // wr.writeBytes(urlParameters);
             //
-            Log.d("main", "Ответ=" + s);
+            //Log.d("main", "Ответ=" + s);
             // wr.flush();
             // wr.close();
             connection.disconnect();
@@ -356,7 +355,7 @@ public class Tools {
                 zin.close();
             }
         } catch (Exception e) {
-            Log.e(TAG, "Unzip exception", e);
+            //Log.e(TAG, "Unzip exception", e);
         }
     }
 
@@ -375,7 +374,7 @@ public class Tools {
             img.setTag(file);
             img.setVisibility(View.VISIBLE);
         } catch (IOException e) {
-            Log.e(TAG, "can't find file: " + file);
+            //Log.e(TAG, "can't find file: " + file);
             img.setVisibility(View.GONE);
         }
     }

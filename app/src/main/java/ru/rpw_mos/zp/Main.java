@@ -14,7 +14,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -175,7 +174,7 @@ public class Main extends AppCompatActivity implements
                                     Toast.makeText(ctx,
                                             "Не выбран ни один расчёт",
                                             Toast.LENGTH_LONG).show();
-                                Log.d("main", ListID.toString());
+                                //Log.d("main", ListID.toString());
                                 dialog.cancel();
                             }
                         })
@@ -185,7 +184,7 @@ public class Main extends AppCompatActivity implements
                         gat.ctx = ctx;
                         gat.execute(checkAcListID.toString());
                         // .toArray(new String[checkAcListID.size()]));
-                        Log.d("main", checkAcListID.toString());
+                        //Log.d("main", checkAcListID.toString());
                         dialog.cancel();
                     }
                 })

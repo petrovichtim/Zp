@@ -3,7 +3,6 @@ package ru.rpw_mos.zp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -54,15 +53,15 @@ public class SendDataTask extends AsyncTask<String, Integer, String> {
             // Выполняем HTTP Post Request
             HttpResponse response = httpclient.execute(httppost);
             String resp = entityToString(response.getEntity());
-            Log.d("пост", "пост прошел и ответ" + response.toString()
-                    + " тело:" + resp);
+            //Log.d("пост", "пост прошел и ответ" + response.toString()
+            //        + " тело:" + resp);
             return resp;
 
         } catch (ClientProtocolException e) {
-            Log.d("пост", "ошибка1" + e.toString());
+            //  Log.d("пост", "ошибка1" + e.toString());
             // m_error = e;
         } catch (IOException e) {
-            Log.d("пост", "ошибка2" + e.toString());
+            //  Log.d("пост", "ошибка2" + e.toString());
             // m_error = e;
         }
         return null;
@@ -114,7 +113,7 @@ public class SendDataTask extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         if (result != null) {// это ответ
             progressDialog.hide();
-            Log.d("SendDataTask", "Данные получены" + result);
+            //Log.d("SendDataTask", "Данные получены" + result);
             Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
             super.onPostExecute(result);
             return;
