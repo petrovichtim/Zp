@@ -9,18 +9,18 @@
         <dex dex="C:\Android\AndroidStudioProjects\Zp\app\build\intermediates\pre-dexed\debug\classes-135d38091e7e79f3e8b0df6d8974b597dee36984.jar" />
     </item>
     <item
-        jar="C:\Android\AndroidStudioProjects\Zp\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="C:\Android\AndroidStudioProjects\Zp\app\build\intermediates\pre-dexed\debug\classes-3c19435593674f6cabf84c5dcd38f3c44b9a455c.jar" />
-    </item>
-    <item
         jar="C:\Android\AndroidStudioProjects\Zp\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\libs\internal_impl-22.1.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
         <dex dex="C:\Android\AndroidStudioProjects\Zp\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-59d1906677aece1836820f4fb439adb6e38c044f.jar" />
+    </item>
+    <item
+        jar="C:\Android\AndroidStudioProjects\Zp\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="C:\Android\AndroidStudioProjects\Zp\app\build\intermediates\pre-dexed\debug\classes-3c19435593674f6cabf84c5dcd38f3c44b9a455c.jar" />
     </item>
     <item
         jar="C:\Users\volodya\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"

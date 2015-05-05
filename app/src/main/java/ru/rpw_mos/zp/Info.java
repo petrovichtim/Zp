@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 public class Info extends Fragment {
     static final String INFO_TYPE = "INFO_TYPE";
@@ -34,8 +33,8 @@ public class Info extends Fragment {
     }
 
     public void setTitle(CharSequence title, CharSequence subtitle) {
-        if (getActivity() instanceof ActionBarActivity) {
-            ActionBar actionBar = ((ActionBarActivity) getActivity())
+        if (getActivity() instanceof AppCompatActivity) {
+            ActionBar actionBar = ((AppCompatActivity) getActivity())
                     .getSupportActionBar();
             actionBar.setTitle(title);
             actionBar.setSubtitle(subtitle);
@@ -49,7 +48,6 @@ public class Info extends Fragment {
         super.onCreate(savedInstanceState);
         mInfoType = getArguments().getInt(INFO_TYPE);
     }
-
 
 
     @Override

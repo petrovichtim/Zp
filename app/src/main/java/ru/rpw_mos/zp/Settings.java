@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,8 +44,8 @@ public class Settings extends Fragment {
     }
 
     public void setTitle(CharSequence title, CharSequence subtitle) {
-        if (getActivity() instanceof ActionBarActivity) {
-            ActionBar actionBar = ((ActionBarActivity) getActivity())
+        if (getActivity() instanceof AppCompatActivity) {
+            ActionBar actionBar = ((AppCompatActivity) getActivity())
                     .getSupportActionBar();
             actionBar.setTitle(title);
             actionBar.setSubtitle(subtitle);

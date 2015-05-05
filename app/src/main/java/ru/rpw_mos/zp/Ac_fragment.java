@@ -12,7 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,7 +43,6 @@ public class Ac_fragment extends Fragment {
     private EditText ed;
     private TextView tv_ac_itog;
     private TextView tv_ac_zp;
-    private boolean mSiteIsAvailable = false;
     private static Cursor mCursor = null;
     static ArrayList<String> mDataList = new ArrayList<String>();
 
@@ -131,7 +130,7 @@ public class Ac_fragment extends Fragment {
 
     public String replaceString(String input, String field, String value) {
         String result = "\\lang1049\\f0  " + getHexString(value);
-       // Log.d("main", "result=" + result);
+        // Log.d("main", "result=" + result);
         input = input.replace(field, result);
         return input;
     }
@@ -142,25 +141,25 @@ public class Ac_fragment extends Fragment {
         mCursor = Main.mDb.getListAccount(Main.mAccount_id);
         mCursor.moveToFirst();
         String file_name = mCursor.getString(mCursor.getColumnIndex("name"))
-                .toString()
+
                 + "_"
-                + mCursor.getString(mCursor.getColumnIndex("date")).toString()
+                + mCursor.getString(mCursor.getColumnIndex("date"))
                 + ".rtf";
         file_rtf = replaceString(file_rtf, "name",
-                mCursor.getString(mCursor.getColumnIndex("name")).toString());
+                mCursor.getString(mCursor.getColumnIndex("name")));
         file_rtf = replaceString(file_rtf, "region",
-                mCursor.getString(mCursor.getColumnIndex("region")).toString());
+                mCursor.getString(mCursor.getColumnIndex("region")));
         file_rtf = replaceString(file_rtf, "date",
-                mCursor.getString(mCursor.getColumnIndex("date")).toString());
+                mCursor.getString(mCursor.getColumnIndex("date")));
         file_rtf = replaceString(file_rtf, "total",
-                mCursor.getString(mCursor.getColumnIndex("total")).toString());
+                mCursor.getString(mCursor.getColumnIndex("total")));
         file_rtf = replaceString(file_rtf, "zp",
-                mCursor.getString(mCursor.getColumnIndex("zp")).toString());
+                mCursor.getString(mCursor.getColumnIndex("zp")));
         int i = 1;
         for (mCursor.moveToFirst(); !mCursor.isAfterLast(); mCursor
                 .moveToNext()) {
             file_rtf = replaceString(file_rtf, "sum" + i,
-                    mCursor.getString(mCursor.getColumnIndex("sum")).toString());
+                    mCursor.getString(mCursor.getColumnIndex("sum")));
             i++;
         }
 
@@ -174,15 +173,15 @@ public class Ac_fragment extends Fragment {
 
     }
 
-    private void CheckHost() {
-        new Thread(new Runnable() {
-            public void run() {
-                mSiteIsAvailable = Tools
-                        .isConnected(getString(R.string.host_to_send));
-            }
-        }).start();
-
-    }
+//    private void CheckHost() {
+//        new Thread(new Runnable() {
+//            public void run() {
+//                mSiteIsAvailable = Tools
+//                        .isConnected(getString(R.string.host_to_send));
+//            }
+//        }).start();
+//
+//    }
 
     private void SendAccount() {
         if (!Tools.isOnline(getActivity())) {
@@ -190,18 +189,6 @@ public class Ac_fragment extends Fragment {
                     Toast.LENGTH_LONG).show();
             return;
         }
-        // ConnectivityManager cm = (ConnectivityManager) getActivity()
-        // .getSystemService(Context.CONNECTIVITY_SERVICE);
-        // NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-
-        // проверяем хост по активной сети
-        // boolean isHostAlive = cm.requestRouteToHost(activeNetwork.getType(),
-        // R.string.host_to_send);
-        // if (!mSiteIsAvailable) {
-        // Toast.makeText(getActivity(), "Сервер не доступен",
-        // Toast.LENGTH_LONG).show();
-        // return;
-        // }
 
         // получить данные для отправки
         mCursor = Main.mDb.getListAccount(Main.mAccount_id);
@@ -251,10 +238,10 @@ public class Ac_fragment extends Fragment {
                 MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
         share_view.layout(0, 0, share_view.getMeasuredWidth(),
                 share_view.getMeasuredHeight());
-       // Log.d("main",
-      //          "save_View_ToSDCard height=" + share_view.getMeasuredHeight());
-      //  Log.d("main",
-      //          "save_View_ToSDCard width=" + share_view.getMeasuredWidth());
+        // Log.d("main",
+        //          "save_View_ToSDCard height=" + share_view.getMeasuredHeight());
+        //  Log.d("main",
+        //          "save_View_ToSDCard width=" + share_view.getMeasuredWidth());
 
         share_view.buildDrawingCache(true);
 
@@ -337,8 +324,8 @@ public class Ac_fragment extends Fragment {
     }
 
     public void setTitle(CharSequence title, CharSequence subtitle) {
-        if (getActivity() instanceof ActionBarActivity) {
-            ActionBar actionBar = ((ActionBarActivity) getActivity())
+        if (getActivity() instanceof AppCompatActivity) {
+            ActionBar actionBar = ((AppCompatActivity) getActivity())
                     .getSupportActionBar();
             actionBar.setTitle(title);
             actionBar.setSubtitle(subtitle);
@@ -350,7 +337,7 @@ public class Ac_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        CheckHost();
+        //CheckHost();
         rootView = inflater.inflate(R.layout.ac_fragment, container, false);
         en = (EditText) rootView.findViewById(R.id.editName);
         er = (EditText) rootView.findViewById(R.id.editRegion);
@@ -383,12 +370,12 @@ public class Ac_fragment extends Fragment {
             mCursor = Main.mDb.getAccount(Main.mAccount_id);
             mCursor.moveToFirst();
             String name = mCursor.getString(mCursor.getColumnIndex("name"));
-            en.setText(name.toString());
+            en.setText(name);
             String region = mCursor.getString(mCursor.getColumnIndex("region"));
-            er.setText(region.toString());
+            er.setText(region);
             String date = mCursor.getString(mCursor.getColumnIndex("date"));
             if (date != null) {
-                ed.setText(date.toString());
+                ed.setText(date);
             }
             Float ac_itog = mCursor.getFloat(mCursor.getColumnIndex("total"));
             Float ac_zp = mCursor.getFloat(mCursor.getColumnIndex("zp"));

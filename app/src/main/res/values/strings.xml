@@ -8,12 +8,10 @@
     <string name="practice">Практика</string>
 
     <string name="app_name">Расчёт зарплаты</string>
-    <string name="action_about">О программе</string>
     <string name="sp_text">Список расчетов</string>
     <string name="new_text">Новый расчёт</string>
     <string name="download">Скачать</string>
     <string name="AboutText">Название программы: Калькулятор стоимости рабочей силы</string>
-    <string name="Developer">Разработчик: Владимир Петрович Тимофеев</string>
     <string name="Site">Сайт приложения:</string>
     <string name="Site_URL">http://rpw-mos.ru/apps</string>
     <string name="Theory_URL">Более подробно по адресу <a href="http://rpw-mos.ru/theory">http://rpw-mos.ru/theory</a></string>
@@ -22,24 +20,14 @@
     <string name="E_mail_value">rpw.mos@gmail.com</string>
     <string name="AboutYear">2015 г.</string>
     <string name="Share_text">Поделиться \nс друзьями</string>
-    <string name="title_activity_about">О программе</string>
     <string name="title_activity_account">Расчёт</string>
     <string name="Choose_email_client">Выберите приложение для отправки сообщения:</string>
     <string name="ns_menu_open">Открыть</string>
     <string name="ns_menu_close">Закрыть</string>
     <string name="Share_via">Поделиться с помощью</string>
 
-    <string name="Link_to_vote"><a name="Будем очень признательны за оставленные комментарии и оценки">https://play.google.com/store/apps/details?id=com.rusdelphi.burdic.lite</a></string>
     <string name="URL_to_vote">https://play.google.com/store/apps/details?id=ru.rpw_mos.zp</string>
     <string name="Share_error">Установите социальные приложения и повторите попытку.</string>
-    <string name="Text_to_vote">Будем очень признательны за оставленные комментарии и оценки</string>
-    <string name="Share_text_ask">Вам понравилось наше приложение?\nРасскажите о нём свом друзьям и знакомыми!</string>
-    <string name="Share_text_ok">Рассказать!</string>
-    <string name="Share_text_cancel">Промолчу</string>
-    <string name="Share_text_ask_IOS">У данного приложения есть версия для IOS\nРасскажите о нём свом друзьям и знакомыми!</string>
-    <string name="Vote_text_ok">Оценить!</string>
-    <string name="Vote_text_cancel">Не хочу :-(</string>
-    <string name="Vote_text">Вам понравилось наше приложение?\nОцените его в Google Play!\nНам, как вашим соотечественникам, будет очень приятно!</string>
 
     <string name="ac_name">Название рассчета</string>
     <string name="ac_region">Населенный пункт/регион</string>
@@ -48,11 +36,9 @@
     <string name="ac_delete">Удалить рассчет</string>
     <string name="ac_list">Список затрат</string>
     <string name="ac_date">Дата рассчета</string>
-    <string name="ac_count">Пересчитать</string>
     <string name="ac_print">Распечатать</string>
     <string name="ac_itog_text">Итоговая сумма затрат:</string>
     <string name="ac_zp_text">Месячная зарплата:</string>
-    <string name="ac_error_text">Сохраните текущее название расчета</string>
     <string name="ac_save_text">Расчёт сохранен</string>
     <string name="ac_delete_text">Расчёт удален</string>
     <string name="ac_send">Отправить расчет на сайт</string>
@@ -65,7 +51,6 @@
     <string name="host_to_send">http://rpw-mos.ru/write_account.php</string>
     <string name="host_to_get_list">http://rpw-mos.ru/get_list_accounts.php</string>
     <string name="host_to_get_ac">http://rpw-mos.ru/get_accounts.php</string>
-    <string name="unexpected_error">Непредвиденная ошибка</string>
     <string name="download_error">Ошибка при получении списка расчетов</string>
     <!-- Теория -->
     <string name="theory_text">Заработная плата, как известно, – это цена рабочей силы. Объективной основой цены рабочей силы служит стоимость рабочей силы. Стоимость рабочей силы определяется, в свою очередь, стоимостью жизненных средств, необходимых для нормального воспроизводства работника и членов его семьи. Для определения величины стоимости рабочей силы в расчете на месяц её использования необходимо учесть все затраты на воспроизводство работника и членов его семьи за время трудовой деятельности, исчисляя их в расчете на месяц, и просуммировать. Принимаемое в расчет время трудовой деятельности — 25 лет, состав семьи — 5 человек (трое детей), исходя из государственных требований обеспечения нормального воспроизводства населения России. </string>

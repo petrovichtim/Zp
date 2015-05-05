@@ -11,7 +11,7 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -104,8 +104,8 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
     }
 
     public void setTitle(CharSequence title, CharSequence subtitle) {
-        if (getActivity() instanceof ActionBarActivity) {
-            ActionBar actionBar = ((ActionBarActivity) getActivity())
+        if (getActivity() instanceof AppCompatActivity) {
+            ActionBar actionBar = ((AppCompatActivity) getActivity())
                     .getSupportActionBar();
             actionBar.setTitle(title);
             actionBar.setSubtitle(subtitle);
