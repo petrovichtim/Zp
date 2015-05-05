@@ -8,10 +8,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class Info extends Fragment {
     static final String INFO_TYPE = "INFO_TYPE";
     private int mInfoType;
+
 
     public static Info getInstance(int InfoType) {
         Info f = new Info();
@@ -48,6 +50,8 @@ public class Info extends Fragment {
         mInfoType = getArguments().getInt(INFO_TYPE);
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class Info extends Fragment {
         if (mInfoType == R.string.practice)
             rootView = inflater.inflate(R.layout.practice_fragment, container,
                     false);
+
         return rootView;
     }
 

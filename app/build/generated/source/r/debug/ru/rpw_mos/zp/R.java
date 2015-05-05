@@ -19,6 +19,7 @@ public final class R {
         public static final int abc_slide_in_top=0x7f040007;
         public static final int abc_slide_out_bottom=0x7f040008;
         public static final int abc_slide_out_top=0x7f040009;
+        public static final int rotate=0x7f04000a;
     }
     public static final class array {
         public static final int menu_icons=0x7f050000;

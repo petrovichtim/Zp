@@ -4,7 +4,7 @@
     android:layout_width="500dp"
     android:layout_height="300dp"
     android:background="@drawable/palace"
-    android:minHeight="50dp" >
+    android:minHeight="50dp">
 
     <TextView
         android:id="@android:id/text1"
@@ -16,7 +16,7 @@
         android:paddingLeft="3dip"
         android:text="Мой расчет стоимости рабочей силы"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView1"

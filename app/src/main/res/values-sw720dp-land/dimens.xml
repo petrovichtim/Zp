@@ -1,5 +1,5 @@
 <resources>
-
+    <dimen name="activity_horizontal_margin">24dp</dimen>
     <dimen name="drawer_content_padding">240dp</dimen>
 
 </resources>
