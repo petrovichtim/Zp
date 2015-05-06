@@ -72,7 +72,6 @@ public class Ac_fragment extends Fragment {
                 try {
                     ShareAccount();
                 } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 return true;

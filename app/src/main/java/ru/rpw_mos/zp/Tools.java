@@ -14,12 +14,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.ConnectionKeepAliveStrategy;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.HttpContext;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -170,7 +164,7 @@ public class Tools {
         try {
             url = new URL("www.r-p-w.ru/wage/write_account.php");
             URLConnection connection;
-            connection =  url.openConnection();
+            connection = url.openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
@@ -193,11 +187,9 @@ public class Tools {
             }
 
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -234,33 +226,13 @@ public class Tools {
             // wr.close();
             connection.disconnect();
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
     }
 
-    public static boolean isConnectedOk(String url) {
-        try {
-            HttpGet request = new HttpGet(url);
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            httpClient.setKeepAliveStrategy(new ConnectionKeepAliveStrategy() {
-                @Override
-                public long getKeepAliveDuration(HttpResponse response,
-                                                 HttpContext context) {
-                    return 0;
-                }
-            });
-            HttpResponse response = httpClient.execute(request);
-            return response.getStatusLine().getStatusCode() == 200;
-
-        } catch (IOException e) {
-        }
-        return false;
-    }
 
     public static boolean isOnline(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context

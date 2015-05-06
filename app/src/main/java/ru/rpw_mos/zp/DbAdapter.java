@@ -330,7 +330,6 @@ public class DbAdapter {
                 date = dateFormat.format(d);
 
             } catch (ParseException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             // Log.d("insertAccount", "date =" + date);
