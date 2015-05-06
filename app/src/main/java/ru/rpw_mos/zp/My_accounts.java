@@ -1,6 +1,5 @@
 package ru.rpw_mos.zp;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,7 +33,6 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
             DbAdapter.COLUMN_REGION, DbAdapter.COLUMN_DATE};
     int[] to = new int[]{R.id.name, R.id.region, R.id.date,};
     private static LoaderManager mngr;
-    static Context ctx;
 
     public static My_accounts getInstance(int AcType) {
         My_accounts f = new My_accounts();
@@ -118,7 +116,6 @@ public class My_accounts extends Fragment implements LoaderCallbacks<Cursor> {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // CheckHost();
-        ctx = getActivity();
         mAcType = getArguments().getInt(ACCOUNTS_TYPE);
         // костыль!
 

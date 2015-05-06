@@ -261,7 +261,7 @@ public class Ac_fragment extends Fragment {
             for (ResolveInfo li : list) {
                 if (li != null && li.activityInfo != null
                         && li.activityInfo.packageName != null
-                        && li.activityInfo.packageName == "com.android.mms") {
+                        && li.activityInfo.packageName.equals("com.android.mms")) {
                 } else
                     ++handlersCount;
             }

@@ -16,7 +16,6 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 public class JSONParser {
-    static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";
     private static final char PARAMETER_DELIMITER = '&';
@@ -54,7 +53,7 @@ public class JSONParser {
                 // is, "UTF-8"), 8);
                 //is,"iso-8859-1"), 8);
                 StringBuilder sb = new StringBuilder();
-                String line = null;
+                String line;// = null;
                 while ((line = reader.readLine()) != null) {
                     sb.append(line + "\n");
                 }

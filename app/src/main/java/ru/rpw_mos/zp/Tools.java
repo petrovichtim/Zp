@@ -77,14 +77,14 @@ public class Tools {
 
     public static String SaveStringToFile(String inFile, Context ctx,
                                           String file_name) {
-       // Log.d("main", "SaveStringToFile path=" + ctx.getFilesDir());
+        // Log.d("main", "SaveStringToFile path=" + ctx.getFilesDir());
         String s = null;
         try {
             File f = getDownloadsStorageDir(file_name);
             FileWriter out = new FileWriter(f);
             out.write(inFile);
             s = f.getAbsolutePath();
-           // Log.d("main", "SaveStringToFile s=" + s);
+            // Log.d("main", "SaveStringToFile s=" + s);
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -147,7 +147,7 @@ public class Tools {
                 new InputStreamReader(is));
         StringBuilder str = new StringBuilder();
 
-        String line = null;
+        String line;
         try {
             while ((line = bufferedReader.readLine()) != null) {
                 str.append(line + "\n");
@@ -169,8 +169,8 @@ public class Tools {
         URL url;
         try {
             url = new URL("www.r-p-w.ru/wage/write_account.php");
-            URLConnection connection = null;
-            connection = (HttpURLConnection) url.openConnection();
+            URLConnection connection;
+            connection =  url.openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/json");
@@ -188,7 +188,7 @@ public class Tools {
                 //Log.d("main", "Получилось!");
                 String s = entityToString(is);
                 //
-               // Log.d("main", "Ответ=" + s);
+                // Log.d("main", "Ответ=" + s);
 
             }
 
@@ -362,7 +362,7 @@ public class Tools {
     public static void loadImage(Context context, ImageView img, String file) {
         try {
             if (Main.mDBisUnzipped) {
-                String path = context.getApplicationInfo().dataDir.toString()
+                String path = context.getApplicationInfo().dataDir
                         + "/" + file;
                 InputStream is = new BufferedInputStream(new FileInputStream(
                         path));

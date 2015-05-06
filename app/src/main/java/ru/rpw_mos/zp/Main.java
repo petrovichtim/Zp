@@ -219,8 +219,7 @@ public class Main extends AppCompatActivity implements
                 pendingFragment = My_accounts.getInstance(R.string.My_accounts);
                 break;
             case 1:
-                pendingFragment = My_accounts
-                        .getInstance(R.string.Comrads_accounts);
+                pendingFragment = My_accounts.getInstance(R.string.Comrads_accounts);
                 break;
             case 2:
                 pendingFragment = Info.getInstance(R.string.theory);

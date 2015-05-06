@@ -74,7 +74,7 @@ public class SendDataTask extends AsyncTask<String, Integer, String> {
                 new InputStreamReader(is));
         StringBuilder str = new StringBuilder();
 
-        String line = null;
+        String line ;//= null;
         try {
             while ((line = bufferedReader.readLine()) != null) {
                 str.append(line + "\n");
