@@ -16,5 +16,4 @@
 #   public *;
 #}
 
-#-keep public class <AskDialogFragment>
 -keep public class <Main>

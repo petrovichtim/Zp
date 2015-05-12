@@ -60,7 +60,7 @@ public class DbAdapter {
             dbFile.getParentFile().mkdirs();
             unpackDB = true;
         } else if (pref.getInt(DB_VERSION_TAG, 0) < DB_VERSION) {
-           // Log.d(TAG, "Forcing updating DB");
+            // Log.d(TAG, "Forcing updating DB");
             unpackDB = true;
         }
 
@@ -73,7 +73,7 @@ public class DbAdapter {
     static void unpackDB(Context c) throws IOException {
         SharedPreferences pref = c.getSharedPreferences(TAG,
                 Context.MODE_PRIVATE);
-       // Log.d(TAG, "Unpacking DB from assets");// to " +
+        // Log.d(TAG, "Unpacking DB from assets");// to " +
         // dbFile.getAbsolutePath());
 
         InputStream is = c.getAssets().open(DB_NAME);
@@ -97,7 +97,7 @@ public class DbAdapter {
             mDb = SQLiteDatabase.openDatabase(getDBPath(c), null,
                     SQLiteDatabase.OPEN_READWRITE);// OPEN_READONLY
 
-       // Log.d(TAG, "Upgrading complete!");
+        // Log.d(TAG, "Upgrading complete!");
 
         pref.edit().putInt(DB_VERSION_TAG, DB_VERSION).apply();
         // Mark that everything has been done correctly
@@ -123,63 +123,6 @@ public class DbAdapter {
         return path + DB_NAME;
     }
 
-    static String getDataPath(Context c) {
-        String path;
-        File DBnoSD = c.getDatabasePath(DB_NAME);
-        try {
-            path = c.getExternalFilesDir(null).getAbsolutePath() + "/";
-        } catch (NoSuchMethodError e) { // Android 2.1 clause
-            path = Environment.getExternalStorageDirectory() + "/Android/data/"
-                    + c.getPackageName() + "/";
-        } catch (NullPointerException e2) { // If no SD card is present - store
-            // DB on main partition
-            return DBnoSD.getAbsolutePath();
-        }
-        if (DBnoSD.exists())
-            DBnoSD.delete();
-        return path;
-    }
-
-    static String getImagesPath(Context c) {
-        String path;
-        File DBnoSD = c.getDatabasePath(DB_NAME);
-        try {
-            path = c.getExternalFilesDir(null).getAbsolutePath() + "/images/";
-        } catch (NoSuchMethodError e) { // Android 2.1 clause
-            path = Environment.getExternalStorageDirectory() + "/Android/data/"
-                    + c.getPackageName() + "/images/";
-        } catch (NullPointerException e2) { // If no SD card is present - store
-            // DB on main partition
-            return DBnoSD.getAbsolutePath();
-        }
-        if (DBnoSD.exists())
-            DBnoSD.delete();
-        File imagesDirectory = new File(path);
-        // have the object build the directory structure, if needed.
-        imagesDirectory.mkdirs();
-        return path;
-    }
-
-    static String getMyImagesPath(Context c) {
-        String path;
-        File DBnoSD = c.getDatabasePath(DB_NAME);
-        try {
-            path = c.getExternalFilesDir(null).getAbsolutePath()
-                    + "/my_images/";
-        } catch (NoSuchMethodError e) { // Android 2.1 clause
-            path = Environment.getExternalStorageDirectory() + "/Android/data/"
-                    + c.getPackageName() + "/my_images/";
-        } catch (NullPointerException e2) { // If no SD card is present - store
-            // DB on main partition
-            return DBnoSD.getAbsolutePath();
-        }
-        if (DBnoSD.exists())
-            DBnoSD.delete();
-        File imagesDirectory = new File(path);
-        // have the object build the directory structure, if needed.
-        imagesDirectory.mkdirs();
-        return path;
-    }
 
     public DbAdapter(Context context) {
         mContext = context;
@@ -194,8 +137,9 @@ public class DbAdapter {
             try {
                 copyDBifNeeded(mContext);
                 //Log.d(TAG, "Opening DB");
-                mDb = SQLiteDatabase.openDatabase(getDBPath(mContext), null,
-                        SQLiteDatabase.OPEN_READWRITE);// OPEN_READONLY
+                if (mDb == null || !mDb.isOpen())
+                    mDb = SQLiteDatabase.openDatabase(getDBPath(mContext), null,
+                            SQLiteDatabase.OPEN_READWRITE);// OPEN_READONLY
             } catch (IOException e) {
                 //Log.e(TAG, "bad DB", e);
                 mDb = null;

@@ -3,25 +3,23 @@ package ru.rpw_mos.zp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SendDataTask extends AsyncTask<String, Integer, String> {
     ProgressDialog progressDialog;
@@ -34,62 +32,59 @@ public class SendDataTask extends AsyncTask<String, Integer, String> {
 
         // Tools.SendJava();
         // Create a new HttpClient and Post Header
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost(ctx.getString(R.string.host_to_send));
+
         try {
-            // Добавляем свои данные
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("name", key[0]));
-            nameValuePairs.add(new BasicNameValuePair("region", key[1]));
-            nameValuePairs.add(new BasicNameValuePair("date", key[2]));
-            nameValuePairs.add(new BasicNameValuePair("total", key[3]));
-            nameValuePairs.add(new BasicNameValuePair("zp", key[4]));
+            URL url1 = new URL(ctx.getString(R.string.host_to_send));
+            HttpURLConnection urlConnection = (HttpURLConnection) url1.openConnection();
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoOutput(true);
+            OutputStream os = urlConnection.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            // вставляем параметры для поста
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("name", key[0]);
+            params.put("region", key[1]);
+            params.put("date", key[2]);
+            params.put("total", key[3]);
+            params.put("zp", key[4]);
             for (int i = 5; i < 40; i++)
-                nameValuePairs.add(new BasicNameValuePair("sum" + (i - 3),
-                        key[i]));
+                params.put("sum" + (i - 3),
+                        key[i]);
 
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,
-                    HTTP.UTF_8));
-            // Выполняем HTTP Post Request
-            HttpResponse response = httpclient.execute(httppost);
-            String resp = entityToString(response.getEntity());
-            //Log.d("пост", "пост прошел и ответ" + response.toString()
-            //        + " тело:" + resp);
-            return resp;
+            writer.write(JSONParser.createQueryStringForParameters(params));
+            writer.flush();
+            writer.close();
+            os.close();
+            try {
+                InputStream is = new BufferedInputStream(urlConnection.getInputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                // is, "UTF-8"), 8);
+                //is,"iso-8859-1"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line;// = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                is.close();
+                String resp = sb.toString();
+                Log.d("пост", "пост прошел и ответ" + resp.toString());
+                return resp;
+            } finally {
+                urlConnection.disconnect();
+            }
 
-        } catch (ClientProtocolException e) {
-            //  Log.d("пост", "ошибка1" + e.toString());
-            // m_error = e;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
         } catch (IOException e) {
-            //  Log.d("пост", "ошибка2" + e.toString());
-            // m_error = e;
+            e.printStackTrace();
         }
+
         return null;
     }
 
-    public static String entityToString(HttpEntity entity)
-            throws IllegalStateException, IOException {
-        InputStream is = entity.getContent();
-        BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(is));
-        StringBuilder str = new StringBuilder();
-
-        String line ;//= null;
-        try {
-            while ((line = bufferedReader.readLine()) != null) {
-                str.append(line + "\n");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                // tough luck...
-            }
-        }
-        return str.toString();
-    }
 
     @Override
     protected void onPreExecute() {
@@ -113,12 +108,14 @@ public class SendDataTask extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         if (result != null) {// это ответ
             progressDialog.hide();
-            //Log.d("SendDataTask", "Данные получены" + result);
+            progressDialog.dismiss();
+            Log.d("SendDataTask", "Данные получены" + result);
             Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
             super.onPostExecute(result);
             return;
         }
         progressDialog.hide();
+        progressDialog.dismiss();
         super.onPostExecute(result);
     }
 
