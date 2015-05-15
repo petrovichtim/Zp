@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:minHeight="50dp">
 
-    <ImageView
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@android:id/icon1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

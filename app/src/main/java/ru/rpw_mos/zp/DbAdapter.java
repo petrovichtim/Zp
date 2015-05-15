@@ -6,9 +6,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -38,17 +39,9 @@ public class DbAdapter {
     private static final String DB_VERSION_TAG = "DB_VERSION";
     private static final String TAG = DbAdapter.class.getSimpleName();
 
-    // public static final String COLUMN_TEXT = "text";
-
-    /*
-     * private static final String DB_CREATE = "create table " + DB_TABLE_NAME +
-     * " (" + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_NOTE +
-     * " text not null);";
-     */
-    private static String DB_PATH = null;
     private static SQLiteDatabase mDb = null;
     private final Context mContext;
-    private DbHelper mDbHelper = null;
+    private DBHelper mDbHelper = null;
 
     static void copyDBifNeeded(Context c) throws IOException {
         boolean unpackDB = false;
@@ -126,9 +119,8 @@ public class DbAdapter {
 
     public DbAdapter(Context context) {
         mContext = context;
-        DB_PATH = getDBPath(context);// context.getDatabasePath(DB_NAME).getPath();
         if (mDbHelper == null)
-            mDbHelper = new DbHelper(mContext, DB_NAME, null, DB_VERSION);
+            mDbHelper = new DBHelper(mContext);
 
     }
 
@@ -311,131 +303,115 @@ public class DbAdapter {
                             "Select le._id _id,le.name name,le.description description, ex._id ex_id, ex.account_id,"
                                     + "ex.expenses_id, ex.sum sum from list_of_expenses  le"
                                     + " join expenses ex on ex.expenses_id=le._id"
-                                    + " where ex.account_id="
-                                    + account_id
-                                    + " order by le._id", null);
+                                    + " where ex.account_id=?  order by le._id", new String[]{String.valueOf(account_id)});
 
         }
 
     }
 
-    private static class DbHelper extends SQLiteOpenHelper {
-        private SQLiteDatabase myDataBase;
+    private class DBHelper extends SQLiteOpenHelper {
+        private static final String DATABASE_NAME = DB_NAME;
+        private static final int DATABASE_VERSION = DB_VERSION;
+        private static final String SP_KEY_DB_VER = "db_ver";
         private final Context mContext;
 
-        public DbHelper(Context context, String name, CursorFactory factory,
-                        int version) {
-
-            super(context, name, factory, version);
-            this.mContext = context;
+        public DBHelper(Context context) {
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            mContext = context;
+            initialize();
         }
 
-        public void createDataBase() throws IOException {
-            boolean dbExist = checkDataBase();
+        /**
+         * Initializes database. Creates database if doesn't exist.
+         */
+        private void initialize() {
+            if (databaseExists()) {
+                SharedPreferences prefs = PreferenceManager
+                        .getDefaultSharedPreferences(mContext);
+                int dbVersion = prefs.getInt(SP_KEY_DB_VER, 1);
+                if (DATABASE_VERSION != dbVersion) {
+                    File dbFile = mContext.getDatabasePath(DATABASE_NAME);
+                    if (!dbFile.delete()) {
+                        Log.w(TAG, "Unable to update database");
+                    }
+                }
+            }
+            if (!databaseExists()) {
+                createDatabase();
+            }
+        }
 
-            if (dbExist) {
-                // ничего не делать - база уже есть
-            } else {
-                // вызывая этот метод создаем пустую базу, позже она будет
-                // перезаписана
-                this.getReadableDatabase();
+        /**
+         * Returns true if database file exists, false otherwise.
+         */
+        private boolean databaseExists() {
+            File dbFile = mContext.getDatabasePath(DATABASE_NAME);
+            return dbFile.exists();
+        }
 
-                try {
-                    copyDataBase();
-                } catch (IOException e) {
-                    throw new Error("Error copying database");
+        /**
+         * Creates database by copying it from assets directory.
+         */
+        private void createDatabase() {
+            String parentPath = mContext.getDatabasePath(DATABASE_NAME).getParent();
+            String path = mContext.getDatabasePath(DATABASE_NAME).getPath();
+
+            File file = new File(parentPath);
+            if (!file.exists()) {
+                if (!file.mkdir()) {
+                    Log.w(TAG, "Unable to create database directory");
+                    return;
+                }
+            }
+
+            InputStream is = null;
+            OutputStream os = null;
+            try {
+                is = mContext.getAssets().open(DATABASE_NAME);
+                os = new FileOutputStream(path);
+
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = is.read(buffer)) > 0) {
+                    os.write(buffer, 0, length);
+                }
+                os.flush();
+                SharedPreferences prefs = PreferenceManager
+                        .getDefaultSharedPreferences(mContext);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt(SP_KEY_DB_VER, DATABASE_VERSION);
+                editor.apply();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (os != null) {
+                    try {
+                        os.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
 
-        /**
-         * Проверяет, существует ли уже эта база, чтобы не копировать каждый раз
-         * при запуске приложения
-         *
-         * @return true если существует, false если не существует
-         */
-        private boolean checkDataBase() {
-
-            File dbFile = new File(DB_PATH);
-            return dbFile.exists();
-            /*
-             * была такая проверка но она не работает в 2.2 и ниже
-			 * SQLiteDatabase checkDB = null;
-			 * 
-			 * try { String myPath = DB_PATH;// + DB_NAME; checkDB =
-			 * SQLiteDatabase.openDatabase(myPath, null,
-			 * SQLiteDatabase.OPEN_READONLY); } catch (SQLiteException e) { //
-			 * база еще не существует } if (checkDB != null) { checkDB.close();
-			 * } return checkDB != null ? true : false;
-			 */
-        }
-
-        /**
-         * Копирует базу из папки assets заместо созданной локальной БД
-         * Выполняется путем копирования потока байтов.
-         */
-        private void copyDataBase() throws IOException {
-            // Открываем локальную БД как входящий поток
-            InputStream myInput = mContext.getAssets().open(DB_NAME);
-
-            // Путь ко вновь созданной БД
-            String outFileName = DB_PATH;// + DB_NAME;
-
-            // Открываем пустую базу данных как исходящий поток
-            OutputStream myOutput = new FileOutputStream(outFileName);
-
-            // перемещаем байты из входящего файла в исходящий
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = myInput.read(buffer)) > 0) {
-                myOutput.write(buffer, 0, length);
-            }
-
-            // закрываем потоки
-            myOutput.flush();
-            myOutput.close();
-            myInput.close();
-        }
-
-        // public void openDataBase() throws SQLException {
-        // // открываем БД
-        // String myPath = DB_PATH;// + DB_NAME;
-        // myDataBase = SQLiteDatabase.openDatabase(myPath, null,
-        // SQLiteDatabase.OPEN_READONLY);
-        // }
-
-        @Override
-        public synchronized void close() {
-            if (myDataBase != null)
-                myDataBase.close();
-            super.close();
-        }
-
         @Override
         public void onCreate(SQLiteDatabase db) {
-
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // Toast.makeText(mContext, "Словарь обновляется",
-            // Toast.LENGTH_LONG)
-            // .show();
-            try {
-                copyDataBase();
-
-            } catch (IOException e) {
-                //
-                throw new Error("Error upgrading database");
-            }
+        public void onUpgrade(SQLiteDatabase db, int oldVersion,
+                              int newVersion) {
         }
 
         @Override
-        public void onDowngrade(SQLiteDatabase db, int oldVersion,
-                                int newVersion) {
-            // super.onDowngrade(db, oldVersion, newVersion);
+        public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         }
-
     }
-
 }

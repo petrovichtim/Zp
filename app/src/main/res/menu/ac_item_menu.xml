@@ -6,19 +6,19 @@
         android:id="@+id/save_account"
         android:icon="@android:drawable/ic_menu_save"
         android:title="@string/ac_save"
-        app:showAsAction="always">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/share_account"
         android:icon="@android:drawable/ic_menu_share"
         android:title="@string/Share_text"
-        app:showAsAction="always">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/send_account"
         android:icon="@android:drawable/ic_menu_send"
         android:title="@string/ac_send"
-        app:showAsAction="always">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/delete_account"
